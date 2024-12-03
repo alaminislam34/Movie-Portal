@@ -3,15 +3,27 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home";
-import Navbar from "./Components/Navbar";
+import Banner from "./Components/Banner";
+import SignIn from "./Pages/SignIn";
+import MainLayout from "./MainLayout/MainLayout";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <Navbar />,
+        element: <Home />,
+        children: [
+          {
+            path: "/",
+            element: <Banner />,
+          },
+        ],
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
       },
     ],
   },

@@ -1,8 +1,9 @@
 import React from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const links = [
     <NavLink>Home</NavLink>,
     <NavLink>All Movies</NavLink>,
@@ -11,7 +12,7 @@ const Navbar = () => {
     <NavLink>Search</NavLink>,
   ];
   return (
-    <div className=" max-w-7xl mx-auto">
+    <div className="">
       <nav className="flex justify-between items-center w-11/12 mx-auto my-2">
         <div className="flex items-center gap-2">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -39,7 +40,7 @@ const Navbar = () => {
           {links}
         </div>
         <div className="flex flex-row">
-          <button>Sign in</button>
+          <button onClick={() => navigate("/signin")}>Sign in</button>
           <button>Sign Up</button>
         </div>
       </nav>
