@@ -6,6 +6,9 @@ export default {
       colors: {
         primary: "#FF4444",
       },
+      backgroundImage: {
+        movie: "url(../src/assets/movies2.jpg)",
+      },
     },
   },
   plugins: [require("daisyui")],

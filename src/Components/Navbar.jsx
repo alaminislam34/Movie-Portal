@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
-  const { user, handleUserDelete } = useContext(ProviderContext);
+  const { user, handleLogoutUser } = useContext(ProviderContext);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -31,6 +31,12 @@ const Navbar = () => {
     >
       Profile
     </NavLink>,
+    <button
+      onClick={handleLogoutUser}
+      className="btn w-full hover:bg-primary bg-white hover:border hover:border-white duration-500 text-white"
+    >
+      log out
+    </button>,
   ];
   return (
     <div className="bg-primary">

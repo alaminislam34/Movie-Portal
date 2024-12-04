@@ -42,7 +42,7 @@ const AuthContext = ({ children }) => {
   }, [setUser]);
 
   // user Log out
-  const handleUserDelete = () => {
+  const handleLogoutUser = () => {
     signOut(auth)
       .then(() => {})
       .catch(() => {});
@@ -52,7 +52,7 @@ const AuthContext = ({ children }) => {
     setUser,
     error,
     createUser,
-    handleUserDelete,
+    handleLogoutUser,
     setMovies,
     movies,
   };

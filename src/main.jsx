@@ -9,6 +9,7 @@ import MainLayout from "./MainLayout/MainLayout";
 import AuthContext from "./Provider/AuthContext";
 import AddMovie from "./Pages/AddMovie";
 import UserProfile from "./Pages/UserProfile";
+import PrivateRoutes from "./routes/PrivateRoutes";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,11 +27,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/addMovie",
-        element: <AddMovie />,
+        element: (
+          <PrivateRoutes>
+            <AddMovie />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/userProfile",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoutes>
+            <UserProfile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/signin",
