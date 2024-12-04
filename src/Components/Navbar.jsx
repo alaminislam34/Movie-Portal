@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RiMenu2Line } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
+import { ProviderContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
+  const { user } = useContext(ProviderContext);
   const navigate = useNavigate();
   const links = [
     <NavLink>Home</NavLink>,
@@ -40,8 +42,14 @@ const Navbar = () => {
           {links}
         </div>
         <div className="flex flex-row">
-          <button onClick={() => navigate("/signin")}>Sign in</button>
-          <button>Sign Up</button>
+          {user ? (
+            <img
+              src={user.photoURL}
+              className="w-12 h-12 object-cover bg-center rounded-full"
+            />
+          ) : (
+            <button onClick={() => navigate("/signin")}>Sign in</button>
+          )}
         </div>
       </nav>
     </div>

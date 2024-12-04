@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Banner from "./Components/Banner";
 import SignIn from "./Pages/SignIn";
 import MainLayout from "./MainLayout/MainLayout";
+import AuthContext from "./Provider/AuthContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthContext>
+      <RouterProvider router={router} />
+    </AuthContext>
   </StrictMode>
 );
