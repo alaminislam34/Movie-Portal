@@ -16,7 +16,10 @@ const Navbar = () => {
     <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
       All Movies
     </NavLink>,
-    <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
+    <NavLink
+      to="/addMovie"
+      className="hover:scale-105 duration-500 hover:translate-x-5"
+    >
       Add Movie
     </NavLink>,
     <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
@@ -83,7 +86,7 @@ const Navbar = () => {
           {user ? (
             <div
               onClick={() => setShow(!show)}
-              className="w-12 h-12 tooltip tooltip-left"
+              className="w-12 h-12 tooltip tooltip-left bg-white rounded-full"
               data-tip={user ? user.email : ""}
             >
               <img
