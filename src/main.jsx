@@ -10,6 +10,7 @@ import AuthContext from "./Provider/AuthContext";
 import AddMovie from "./Pages/AddMovie";
 import UserProfile from "./Pages/UserProfile";
 import PrivateRoutes from "./routes/PrivateRoutes";
+import Movies from "./Pages/Movies";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,12 @@ const router = createBrowserRouter([
             element: <Banner />,
           },
         ],
+      },
+      {
+        path: "/movies",
+        element: <Movies />,
+        loader: () =>
+          fetch("https://movie-portal-server-site.vercel.app/movies"),
       },
       {
         path: "/addMovie",

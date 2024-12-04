@@ -13,7 +13,10 @@ const Navbar = () => {
     <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
       Home
     </NavLink>,
-    <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
+    <NavLink
+      to="/movies"
+      className="hover:scale-105 duration-500 hover:translate-x-5"
+    >
       All Movies
     </NavLink>,
     <NavLink

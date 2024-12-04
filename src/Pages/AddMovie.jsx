@@ -116,6 +116,10 @@ const AddMovie = () => {
             icon: "success",
             confirmButtonText: "Ok",
           });
+          form.reset();
+          setSelectGenres(null);
+          setSelectedYear(null);
+          setRating(0);
         }
       })
       .catch(() => {});
@@ -223,7 +227,7 @@ const AddMovie = () => {
               onChange={handleYearChange}
               placeholder="Select a year"
               isClearable
-              className="basic-select border-2"
+              className="basic-select border-2 text-white"
               classNamePrefix="select"
               required
               styles={{
@@ -235,10 +239,19 @@ const AddMovie = () => {
                   boxShadow: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
                   border: "none",
                   "border:focus": "none",
+                  color: "white",
                 }),
                 menu: (baseStyles) => ({
                   ...baseStyles,
                   color: "#000000",
+                }),
+                singleValue: (baseStyles) => ({
+                  ...baseStyles,
+                  color: "white",
+                }),
+                placeholder: (baseStyles) => ({
+                  ...baseStyles,
+                  color: "white",
                 }),
               }}
             />
