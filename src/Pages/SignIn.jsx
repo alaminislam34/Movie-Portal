@@ -5,19 +5,18 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { auth } from "../Firebase/firebase.config";
 import { ProviderContext } from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 // import { ProviderContext } from "../Provider/AuthContext";
 
 const SignIn = () => {
-  const { user, setUser } = useContext(ProviderContext);
-  console.log(user);
-  const [error, setError] = useState();
+  const { setUser, error, createUser } = useContext(ProviderContext);
   const [passError, setPassError] = useState(false);
-  // const { number } = useContext(ProviderContext);
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -28,25 +27,7 @@ const SignIn = () => {
     const user = { name, email, photoUrl };
     const valid = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (valid.test(password)) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-          updateProfile(auth.currentUser, updateUser)
-            .then(() => {})
-            .catch((error) => {
-              setError(error.message);
-            });
-          const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-          });
-          return () => unSubscribe();
-          console.log(result.user);
-
-          setUser(result.user);
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
-      const updateUser = { displayName: name, photoURL: photoUrl };
+      createUser(email, passError, name, photoUrl);
 
       fetch("https://movie-portal-server-site.vercel.app/users", {
         method: "POST",
@@ -57,23 +38,29 @@ const SignIn = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          if (data.insertedId) {
+            Swal.fire({
+              title: "Success!",
+              text: "Account Register Successfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          }
         });
     } else {
       setPassError(true);
     }
   };
+
   const signUpGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
         {
           result.user && setUser(result.user);
         }
       })
       .catch((error) => {
-        console.log(error.message);
         {
           error && setError(error);
         }

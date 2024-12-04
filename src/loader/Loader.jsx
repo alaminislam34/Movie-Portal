@@ -1,7 +1,17 @@
+import { Oval } from "react-loader-spinner";
+
 const Loader = () => {
   return (
-    <div>
-      <h1>loader</h1>
+    <div className="w-full h-full flex justify-center items-center">
+      <Oval
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="oval-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
     </div>
   );
 };
