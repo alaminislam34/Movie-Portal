@@ -11,6 +11,7 @@ export const ProviderContext = createContext();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [movies, setMovies] = useState([]);
   // sign in user
   const createUser = (email, password, name, photoUrl) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -46,7 +47,15 @@ const AuthContext = ({ children }) => {
       .then(() => {})
       .catch(() => {});
   };
-  const info = { user, setUser, error, createUser, handleUserDelete };
+  const info = {
+    user,
+    setUser,
+    error,
+    createUser,
+    handleUserDelete,
+    setMovies,
+    movies,
+  };
   return (
     <ProviderContext.Provider value={info}>{children}</ProviderContext.Provider>
   );

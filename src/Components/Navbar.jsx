@@ -25,6 +25,12 @@ const Navbar = () => {
     <NavLink className="hover:scale-105 duration-500 hover:translate-x-5">
       My Favorites
     </NavLink>,
+    <NavLink
+      to="/userProfile"
+      className="hover:scale-105 duration-500 hover:translate-x-5"
+    >
+      Profile
+    </NavLink>,
   ];
   return (
     <div className="bg-primary">

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Select from "react-select";
 import { Rating } from "react-simple-star-rating";
+import { ProviderContext } from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 
 const AddMovie = () => {
   const [selectGenres, setSelectGenres] = useState();
@@ -8,7 +10,6 @@ const AddMovie = () => {
   const [error, setError] = useState("");
   const [rating, setRating] = useState(0);
 
-  console.log(error, rating);
   // select options
   const options = [
     { value: "Comedy", label: "Comedy" },
@@ -48,7 +49,6 @@ const AddMovie = () => {
 
   const handleRating = (rate) => {
     setRating(rate);
-    console.log(rating);
   };
   const handleAddMovie = (e) => {
     e.preventDefault();
@@ -100,21 +100,45 @@ const AddMovie = () => {
       rating,
       summary,
     };
-    console.log(movie);
+    fetch("https://movie-portal-server-site.vercel.app/movies", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(movie),
+    })
+      .then((result) => {
+        console.log(result);
+        if (result) {
+          Swal.fire({
+            title: "Success!",
+            text: "Movies Added Successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch(() => {});
   };
 
   return (
     <div className="flex justify-center items-center">
       <form
         onSubmit={handleAddMovie}
-        className="p-4 md:p-6 rounded-lg my-12 flex flex-col gap-2 bg-base-300 md:w-6/12 w-10/12 mx-auto"
+        className="p-4 md:p-6 rounded-lg my-12 flex flex-col gap-2 bg-primary md:w-6/12 w-10/12 mx-auto text-white"
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-center my-2">
           Add Movie
         </h2>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Movie Poster
-          <input type="text" name="poster" onInput={handlePosterUrl} required />
+          <input
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent/20 rounded-lg shadow-inner border-b-2 border-b-transparent focus:border-b-white outline-none"
+            type="text"
+            name="poster"
+            onInput={handlePosterUrl}
+            required
+          />
           {error === "poster" ? (
             <small className="text-red-500 my-1 text-left">
               Please enter a valid image URL (e.g., .jpg, .png)
@@ -123,9 +147,14 @@ const AddMovie = () => {
             " "
           )}
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Movie Title
-          <input type="text" name="title" required />
+          <input
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent/20 rounded-lg shadow-inner border-b-2 border-b-transparent focus:border-b-white outline-none"
+            type="text"
+            name="title"
+            required
+          />
           {error === "title" ? (
             <small className="text-red-500 my-1 text-left">
               Title must be 2 character.
@@ -134,25 +163,58 @@ const AddMovie = () => {
             " "
           )}
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Your Email
-          <input type="email" name="email" required />
+          <input
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent/20 rounded-lg shadow-inner border-b-2 border-b-transparent focus:border-b-white outline-none"
+            type="email"
+            name="email"
+            required
+          />
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Genre
           <Select
             isMulti
             name="genre"
             options={options}
-            className="basic-multi-select"
+            className="basic-multi-select text-primary font-semibold"
             classNamePrefix="select"
             onChange={handleGenres}
             required
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                padding: "6px 10px",
+                ":hover": {
+                  outline: "none",
+                  borderBottom: "2px solid white",
+                },
+                ":focus": {
+                  outline: "none",
+                  borderBottom: "2px solid white",
+                },
+                borderRadius: "8px",
+                backgroundColor: "#CC3636",
+                boxShadow: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
+                border: "none",
+                "border:focus": "none",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                color: "#cc3636",
+              }),
+            }}
           />
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Movie Duration
-          <input type="number" name="duration" required />
+          <input
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent/20 rounded-lg shadow-inner border-b-2 border-b-transparent focus:border-b-white outline-none"
+            type="number"
+            name="duration"
+            required
+          />
           {error === "duration" ? (
             <small className="text-red-500 my-1 text-left">
               Duration must be greater than 60
@@ -161,7 +223,7 @@ const AddMovie = () => {
             " "
           )}
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Release Year
           <Select
             options={yearOptions}
@@ -171,6 +233,29 @@ const AddMovie = () => {
             className="basic-select"
             classNamePrefix="select"
             required
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                padding: "6px 10px",
+                ":hover": {
+                  outline: "none",
+                  borderBottom: "2px solid white",
+                },
+                ":focus": {
+                  outline: "none",
+                  borderBottom: "2px solid white",
+                },
+                borderRadius: "8px",
+                backgroundColor: "#CC3636",
+                boxShadow: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
+                border: "none",
+                "border:focus": "none",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                color: "#cc3636",
+              }),
+            }}
           />
         </label>
 
@@ -203,9 +288,15 @@ const AddMovie = () => {
             ""
           )}
         </div>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-2 text-base md:text-lg">
           Summary
-          <textarea name="summary" required rows={5} cols={5}></textarea>
+          <textarea
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent/20 rounded-lg shadow-inner border-b-2 border-b-transparent focus:border-b-white outline-none"
+            name="summary"
+            required
+            rows={5}
+            cols={5}
+          ></textarea>
           {error === "summary" && (
             <small className="text-red-600 text-left my-1">
               Summary must be at least 10 character
