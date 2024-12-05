@@ -1,20 +1,28 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Movies = () => {
-  const data = useLoaderData();
+  const [data, setData] = useState([]);
+  console.log(data);
+
+  useEffect(() => {
+    fetch("https://movie-portal-server-site.vercel.app/movies")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   return (
     <div className="m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {data
-        ? data.map((movie) => (
-            <div key={movie._id} className="bg-white shadow-xl rounded-lg p-4">
-              <div className="relative group duration-500 overflow-hidden rounded-xl">
+        ? data.slice(0, 8).map((movie) => (
+            <div key={movie._id} className="bg-white shadow-xl rounded-lg">
+              <div className="relative group duration-500 overflow-hidden rounded-t-lg h-[300px] sm:h-[400px] md:h-[400px]">
                 <img
-                  className="aspect-square object-cover bg-center bg-no-repeat w-full h-full"
+                  className="object-cover bg-center bg-no-repeat w-full h-full"
                   src={movie.poster}
                   alt=""
                 />
-                <div className="flex justify-center items-center absolute top-0 left-0 w-full h-full rounded-xl">
-                  <div className="duration-500 bg-black/60 w-0 h-0 group-hover:w-full group-hover:h-full group-hover:flex justify-center items-center relative"></div>
+                <div className="flex justify-center items-center absolute top-0 left-0 w-full h-full">
+                  <div className="duration-500 bg-black/50 w-0 h-0 group-hover:w-full group-hover:h-full group-hover:flex justify-center items-center relative"></div>
                 </div>
                 <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
                   <Link
@@ -25,18 +33,22 @@ const Movies = () => {
                   </Link>
                 </div>
               </div>
-              <h2 className="text-xl md:text-2xl my-2 font-semibold">
-                {movie.title}
-              </h2>
-              <div className="flex flex-row items-center gap-2">
-                <p className="text-lg md:text-xl">Genre: </p>
-                <p className="flex flex-row items-center gap-2">
-                  {movie.genre.map((g, i) => (
-                    <p key={i} className=" text-primary font-bold">
-                      {g}
-                    </p>
-                  ))}
-                </p>
+              <div className="px-4 pb-4">
+                <h2 className="text-lg md:text-xl my-2 font-semibold">
+                  {movie.title}
+                </h2>
+                <div className="flex flex-row items-center gap-2">
+                  <p className="flex flex-wrap items-center gap-2">
+                    {movie.genre.map((g, i) => (
+                      <p
+                        key={i}
+                        className="text-primary font-medium text-xs md:text-sm"
+                      >
+                        {g}
+                      </p>
+                    ))}
+                  </p>
+                </div>
               </div>
             </div>
           ))

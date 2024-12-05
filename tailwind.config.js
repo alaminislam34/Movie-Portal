@@ -8,7 +8,11 @@ export default {
       },
       backgroundImage: {
         movie: "url(../src/assets/movies2.jpg)",
+        bgMovie: "url(../src/assets/moviebg.jpg)",
       },
+    },
+    fontFamily: {
+      Yatra: ["Yatra One", "system-ui"],
     },
   },
   plugins: [require("daisyui")],

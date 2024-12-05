@@ -39,9 +39,6 @@ const Banner = () => {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
         navigation={
           (true,
           {
@@ -60,19 +57,31 @@ const Banner = () => {
         className="mySwiper h-full w-10/12 mx-auto"
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className="h-full w-full">
+          <SwiperSlide key={index} className="h-full w-full relative">
             <img
-              className="w-11/12 mx-auto border-primary border h-full object-cover bg-center rounded-xl"
+              className="w-11/12 mx-auto h-full object-cover bg-center rounded-xl"
               src={image.poster}
               alt={image.title}
             />
+            <h2 className="absolute bottom-10 right-20 text-white text-xl md:text-2xl lg:text-4xl font-semibold font-Yatra bg-primary/50 backdrop-blur-sm py-2 px-4 flex flex-col justify-center items-center rounded-lg">
+              {image.title}{" "}
+              <span className="text-base md:text-lg inline-block">
+                Release Year: {image.releaseYear}
+              </span>
+            </h2>
           </SwiperSlide>
         ))}
       </Swiper>
-      <button className="custom-prev z-10 absolute left-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border">
+      <button
+        ref={prevRef}
+        className="custom-prev z-10 absolute left-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
+      >
         <FiTriangle className="-rotate-90" />
       </button>
-      <button className="custom-next z-10 absolute right-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border">
+      <button
+        ref={nextRef}
+        className="custom-next z-10 absolute right-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
+      >
         <FiTriangle className="rotate-90" />
       </button>
     </div>
