@@ -11,6 +11,8 @@ import AddMovie from "./Pages/AddMovie";
 import UserProfile from "./Pages/UserProfile";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import Movies from "./Pages/Movies";
+import SignUp from "./Pages/SignUp";
+import ViewDetails from "./Pages/ViewDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,15 +24,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <Banner />,
+            element: <Movies />,
+            loader: () =>
+              fetch("https://movie-portal-server-site.vercel.app/movies"),
           },
         ],
-      },
-      {
-        path: "/movies",
-        element: <Movies />,
-        loader: () =>
-          fetch("https://movie-portal-server-site.vercel.app/movies"),
       },
       {
         path: "/addMovie",
@@ -51,6 +49,22 @@ const router = createBrowserRouter([
       {
         path: "/signin",
         element: <SignIn />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/viewDetails/:id",
+        element: (
+          <PrivateRoutes>
+            <ViewDetails />
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://movie-portal-server-site.vercel.app/movies/${params.id}`
+          ),
       },
     ],
   },

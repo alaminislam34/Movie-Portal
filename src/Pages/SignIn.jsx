@@ -1,57 +1,44 @@
 import {
-  createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile,
 } from "firebase/auth";
-import { useContext, useEffect, useState } from "react";
-import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { auth } from "../Firebase/firebase.config";
-import { ProviderContext } from "../Provider/AuthContext";
+import { FaEye, FaGoogle } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-// import { ProviderContext } from "../Provider/AuthContext";
+import { auth } from "../Firebase/firebase.config";
+import { useContext, useState } from "react";
+import { ProviderContext } from "../Provider/AuthContext";
+import { IoEyeOff } from "react-icons/io5";
 
 const SignIn = () => {
-  const { setUser, error, createUser } = useContext(ProviderContext);
-  const [passError, setPassError] = useState(false);
+  const { setUser, setError, error, user } = useContext(ProviderContext);
+  const [show, setShow] = useState(false);
+  const location = useLocation();
+  console.log(user);
+  const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
     const email = form.email.value;
-    const photoUrl = form.photo.value;
     const password = form.password.value;
-    const user = { name, email, photoUrl };
-    const valid = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    if (valid.test(password)) {
-      createUser(email, passError, name, photoUrl);
-
-      fetch("https://movie-portal-server-site.vercel.app/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success!",
-              text: "Account Register Successfully",
-              icon: "success",
-              confirmButtonText: "Ok",
-            });
-          }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result);
+        setUser(result.user);
+        Swal.fire({
+          title: "Success!",
+          text: "Account Register Successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
         });
-    } else {
-      setPassError(true);
-    }
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
-
   const signUpGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -59,6 +46,14 @@ const SignIn = () => {
         {
           result.user && setUser(result.user);
         }
+        Swal.fire({
+          title: "Success!",
+          text: "Account Register Successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        navigate(location?.state ? location.state : "/");
+        console.log(location);
       })
       .catch((error) => {
         {
@@ -66,110 +61,76 @@ const SignIn = () => {
         }
       });
   };
+
   return (
-    <div className="flex justify-center items-center mt-12">
-      <section>
-        <form className="p-6 hidden flex-col justify-start bg-base-200 shadow-lg border border-black rounded-lg space-y-1">
+    <div className="flex justify-center items-center my-12">
+      <section className="w-11/12 md:w-4/6 lg:w-6/12 mx-auto my-12">
+        <form
+          onSubmit={handleSignIn}
+          className="p-6 flex flex-col gap-2 justify-start bg-base-200 shadow-lg border border-black rounded-lg space-y-1 w-full"
+        >
           <h2 className="text-2xl md:text-3xl lg:text-4xl text-center mb-4">
             Sign In
           </h2>
-          <label className="flex flex-col gap-2">
-            Your Email
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            Your Password
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            <Link className="text-xs md:text-sm">Forget password</Link>
-          </label>
-          <button type="submit" className="btn">
-            Login
-          </button>
-          <p>
-            Don't have an account ? <Link>Sign Up</Link>
-          </p>
-        </form>
-        <form
-          onSubmit={handleSignUp}
-          className="p-6 flex flex-col justify-start bg-base-200 shadow-lg border border-black rounded-lg space-y-1 lg:w-96"
-        >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl text-center mb-4">
-            Register
-          </h2>
-          {error ? <p className="text-red-500 text-center"> {error} </p> : ""}
-
-          <label className="flex flex-col gap-2">
-            Your Name
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="name"
-              name="name"
-              placeholder="Name"
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            Your Email
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            Your Password
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            {passError ? (
-              <small className="text-red-500">
-                Password must be 1 upperCase 1 lowerCase & 6 character
-              </small>
-            ) : (
-              ""
-            )}
-          </label>
-          <label className="flex flex-col gap-2">
-            Photo URL
-            <input
-              required
-              className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
-              type="text"
-              name="photo"
-              placeholder="photo url"
-            />
-          </label>
-          <br />
-          <button type="submit" className="btn border py-2 border-black">
-            Register
-          </button>
-          <button
-            onClick={signUpGoogle}
-            type="button"
-            className="py-2 text-center flex flex-row justify-center items-center gap-2 border border-black hover:bg-gray-400 hover:border-transparent duration-500"
-          >
-            <FaGoogle /> Continue with google
-          </button>
-          <p>
-            Already have an account ? <Link>Login</Link>
+          {error && (
+            <small className="text-center text-red-500 my-2">{error}</small>
+          )}
+          <div>
+            <label className="flex flex-col gap-2">
+              Your Email
+              <input
+                required
+                className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black "
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="flex flex-col gap-2">
+              Your Password
+              <div className="relative">
+                <input
+                  required
+                  className="py-1 pr-2 border-b focus:border-b-2 bg-transparent focus:outline-none border-b-black w-full"
+                  type={show ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  className="absolute top-1/2 -translate-y-1/2 right-2 md:right-4"
+                >
+                  {show ? <FaEye className="" /> : <IoEyeOff className="" />}
+                </button>
+              </div>
+              <Link className="text-xs md:text-sm underline">
+                Forget password
+              </Link>
+            </label>
+          </div>
+          <div className="flex flex-col gap-2">
+            <button
+              type="submit"
+              className="btn border w-full py-2 duration-500 bg-primary hover:bg-[#d12222] text-white text-base md:text-lg"
+            >
+              Login
+            </button>
+            <button
+              onClick={signUpGoogle}
+              type="button"
+              className="w-full py-2 text-center rounded-lg flex flex-row justify-center items-center gap-2 bg-gray-400 hover:border-transparent duration-500"
+            >
+              <FaGoogle /> Continue with google
+            </button>
+          </div>
+          <p className="text-right ">
+            Don't have an account ?{" "}
+            <Link to="/signup" className="font-semibold">
+              Sign Up
+            </Link>
           </p>
         </form>
       </section>

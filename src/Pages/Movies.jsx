@@ -1,8 +1,7 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Movies = () => {
   const data = useLoaderData();
-  console.log(data);
   return (
     <div className="m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {data
@@ -18,9 +17,12 @@ const Movies = () => {
                   <div className="duration-500 bg-black/60 w-0 h-0 group-hover:w-full group-hover:h-full group-hover:flex justify-center items-center relative"></div>
                 </div>
                 <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
-                  <button className="py-2 px-4 border-2 border-primary text-primary hover:text-white hover:bg-primary duration-1000 relative left-72 group-hover:left-0">
+                  <Link
+                    to={`/viewDetails/${movie._id}`}
+                    className="py-2 px-4 border-2 border-primary text-primary hover:text-white hover:bg-primary duration-1000 relative left-72 group-hover:left-0"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
               <h2 className="text-xl md:text-2xl my-2 font-semibold">
@@ -29,8 +31,10 @@ const Movies = () => {
               <div className="flex flex-row items-center gap-2">
                 <p className="text-lg md:text-xl">Genre: </p>
                 <p className="flex flex-row items-center gap-2">
-                  {movie.genre.map((g) => (
-                    <p className=" text-primary font-bold">{g}</p>
+                  {movie.genre.map((g, i) => (
+                    <p key={i} className=" text-primary font-bold">
+                      {g}
+                    </p>
                   ))}
                 </p>
               </div>
