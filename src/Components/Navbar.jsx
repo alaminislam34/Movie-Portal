@@ -11,14 +11,14 @@ const Navbar = () => {
   return (
     <div className="bg-primary">
       <nav className="grid grid-cols-2 md:grid-cols-3 justify-center items-center md:py-4 py-2 text-white max-w-7xl mx-auto px-2">
-        <div className="flex items-center gap-1 drawer-end z-10">
+        <div className="flex items-center sm:gap-1 drawer-end z-10">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             <label
               htmlFor="my-drawer"
-              className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 py-1 md:py-2 flex justify-center items-center px-2 md:px-4 rounded-md"
+              className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 py-1 px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
             >
-              <RiMenu2Line className="text-lg md:text-xl lg:text-2xl" />
+              <RiMenu2Line className="text-xl md:text-xl lg:text-2xl" />
             </label>
           </div>
           <div className="drawer-content">
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   name="search"
-                  className="w-full py-1.5 md:py-2 px-2 md:px-4 text-black bg-transparent border-2 border-primary outline-none"
+                  className="w-full py-1.5 md:py-2 px-2 md:px-4 text-black bg-transparent border rounded-lg border-primary outline-none"
                   placeholder="Search"
                 />
               </div>
@@ -103,7 +103,7 @@ const Navbar = () => {
           {user ? (
             <div
               onClick={() => setShow(!show)}
-              className="w-12 lg:w-14 h-12 lg:h-14 tooltip tooltip-left bg-white rounded-full z-10"
+              className="w-10 md:w-12 lg:w-14 h-10 md:h-12 lg:h-14 tooltip tooltip-left bg-white rounded-full z-10"
               data-tip={user ? user.email : ""}
             >
               <img

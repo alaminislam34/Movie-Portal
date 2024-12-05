@@ -34,9 +34,7 @@ const SignUp = () => {
         .then(() => {
           const updateUser = { displayName: name, photoURL: photoUrl };
           updateProfile(auth.currentUser, updateUser)
-            .then((result) => {
-              console.log(result);
-
+            .then(() => {
               form.reset();
             })
             .catch((error) => {
@@ -85,7 +83,6 @@ const SignUp = () => {
           confirmButtonText: "Ok",
         });
         navigate(location?.state ? location.state : "/");
-        console.log(location);
       })
       .catch((error) => {
         {

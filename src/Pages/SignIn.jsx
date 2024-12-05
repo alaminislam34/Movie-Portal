@@ -53,7 +53,6 @@ const SignIn = () => {
           confirmButtonText: "Ok",
         });
         navigate(location?.state ? location.state : "/");
-        console.log(location);
       })
       .catch((error) => {
         {
