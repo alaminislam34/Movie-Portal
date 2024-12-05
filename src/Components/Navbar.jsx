@@ -48,7 +48,7 @@ const Navbar = () => {
                   Home
                 </NavLink>
                 <NavLink
-                  to="/movies"
+                  to="/allMovies"
                   className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                 >
                   All Movies
@@ -94,7 +94,7 @@ const Navbar = () => {
             <input
               type="text"
               name="search"
-              className="w-full py-2 lg:py-3 px-4 text-white bg-[#d12222] backdrop-blur-xl border-none outline-none"
+              className="w-full py-2 lg:py-3 px-4 text-primary rounded-lg bg-white backdrop-blur-xl border-none outline-none"
               placeholder="Search"
             />
           </div>

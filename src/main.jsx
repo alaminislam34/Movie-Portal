@@ -12,6 +12,7 @@ import UserProfile from "./Pages/UserProfile";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import SignUp from "./Pages/SignUp";
 import ViewDetails from "./Pages/ViewDetails";
+import AllMovies from "./Pages/AllMovies";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/allMovies",
+        element: <AllMovies />,
       },
       {
         path: "/addMovie",
