@@ -54,7 +54,7 @@ const Banner = () => {
         }}
         modules={[Autoplay, Pagination, Navigation]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="mySwiper h-full w-10/12 mx-auto"
+        className="mySwiper h-full w-11/12 md:w-10/12 mx-auto"
       >
         {images.map((image, index) => (
           <SwiperSlide key={index} className="h-full w-full relative">
@@ -63,9 +63,9 @@ const Banner = () => {
               src={image.poster}
               alt={image.title}
             />
-            <h2 className="absolute bottom-10 right-20 text-white text-xl md:text-2xl lg:text-4xl font-semibold font-Yatra bg-primary/50 backdrop-blur-sm py-2 px-4 flex flex-col justify-center items-center rounded-lg">
+            <h2 className="absolute bottom-10 right-10 md:right-20 lg:right-24 text-white text-lg md:text-xl lg:text-2xl font-semibold font-Yatra bg-primary/50 backdrop-blur-sm py-2 px-4 flex flex-col justify-center items-center rounded-lg">
               {image.title}{" "}
-              <span className="text-base md:text-lg inline-block">
+              <span className="text-sm md:text-base lg:text-lg inline-block">
                 Release Year: {image.releaseYear}
               </span>
             </h2>
@@ -74,13 +74,13 @@ const Banner = () => {
       </Swiper>
       <button
         ref={prevRef}
-        className="custom-prev z-10 absolute left-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
+        className="custom-prev z-[1] absolute left-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
       >
         <FiTriangle className="-rotate-90" />
       </button>
       <button
         ref={nextRef}
-        className="custom-next z-10 absolute right-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
+        className="custom-next z-[1] absolute right-8 top-1/2 transform -translate-y-1/2 w-10 md:w-16 md:h-16 h-10 bg-primary flex justify-center items-center text-white rounded-full text-lg md:text-xl lg:text-2xl duration-700 hover:bg-transparent hover:border-primary hover:text-primary border"
       >
         <FiTriangle className="rotate-90" />
       </button>

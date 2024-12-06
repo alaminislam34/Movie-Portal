@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Movies = () => {
   const [data, setData] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     fetch("https://movie-portal-server-site.vercel.app/movies")
@@ -11,7 +10,7 @@ const Movies = () => {
       .then((data) => setData(data));
   }, []);
   return (
-    <div className="m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="md:m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {data
         ? data.slice(0, 8).map((movie) => (
             <div key={movie._id} className="bg-white shadow-xl rounded-lg">

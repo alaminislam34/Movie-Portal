@@ -10,7 +10,7 @@ const AllMovies = () => {
       .then((data) => setData(data));
   }, []);
   return (
-    <div className="py-6 md:py-12 bg-base-300">
+    <div className="py-6 md:py-12 bg-base-300 mt-14">
       <div className="flex justify-center flex-col items-center">
         <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-2">
           OUR LATEST MOVIES

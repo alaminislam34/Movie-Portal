@@ -19,3 +19,26 @@ svg.star-svg {
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.slider {
+  display: flex;
+  animation: scroll 15s linear infinite;
+}
+.slide {
+  flex-shrink: 0;
+  width: 200px;
+  margin-right: 20px;
+}
+.slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
