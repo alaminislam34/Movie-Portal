@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-14 md:w-20 lg:w-[88px]">
+    <div className="h-14 md:h-20 lg:h-[88px]">
       <div className="bg-primary fixed top-0 left-0 w-full z-50">
         <nav className="grid grid-cols-2 md:grid-cols-3 justify-center items-center md:py-4 py-2 text-white max-w-7xl mx-auto px-2">
           <div className="flex items-center sm:gap-1 drawer-end z-10">

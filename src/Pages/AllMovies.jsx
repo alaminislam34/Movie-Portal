@@ -17,21 +17,18 @@ const AllMovies = () => {
         </h3>
         <div className="border-b-2 border-primary w-10"></div>
       </div>
-      <div className="m-6 grid grid-cols-1 gap-4 md:gap-6">
+      <div className="m-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {data
           ? data.map((movie) => (
-              <div
-                key={movie._id}
-                className="bg-white shadow-2xl rounded-lg grid grid-cols-1 md:grid-cols-3"
-              >
-                <div className="rounded-t-lg h-[300px] md:h-[400px] md:col-span-1">
+              <div key={movie._id} className="bg-white shadow-2xl rounded-lg">
+                <div className="rounded-t-lg h-[300px] md:h-[400px] ">
                   <img
                     className="object-cover bg-center bg-no-repeat w-full h-full"
                     src={movie.poster}
                     alt=""
                   />
                 </div>
-                <div className="p-4 md:p-6 flex flex-col justify-center gap-4 md:col-span-2">
+                <div className="p-4 md:p-6 flex flex-col justify-center gap-4">
                   <h2 className="text-lg md:text-xl font-semibold">
                     {movie.title}
                   </h2>
@@ -47,9 +44,17 @@ const AllMovies = () => {
                       ))}
                     </p>
                   </div>
-                  <p className="text-xs md:text-sm lg:text-base">
-                    {movie.summary.slice(0, 300)}...
-                  </p>
+                  <div className="grid grid-cols-2 justify-start items-center border-t pt-2">
+                    <p className="text-xs md:text-sm lg:text-base">
+                      {movie.duration} minute
+                    </p>
+                    <p>
+                      {movie.releaseYear <= 2025 ? "Release Year: " : ""}
+                      {movie.releaseYear <= 2025
+                        ? movie.releaseYear
+                        : "Coming soon..."}
+                    </p>
+                  </div>
                   <div className="flex flex-row gap-4">
                     <div className="">
                       <Link
@@ -57,14 +62,6 @@ const AllMovies = () => {
                         className="py-2 md:px-4 px-3 text-sm md:text-base border duration-500 border-primary text-primary hover:text-white hover:bg-primary inline-block"
                       >
                         View Details
-                      </Link>
-                    </div>
-                    <div className="">
-                      <Link
-                        to={`/viewDetails/${movie._id}`}
-                        className="py-2 md:px-4 px-3 text-sm md:text-base border duration-500 border-primary text-primary hover:text-white hover:bg-primary inline-block"
-                      >
-                        Add Favorite
                       </Link>
                     </div>
                   </div>

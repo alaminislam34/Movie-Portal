@@ -36,7 +36,7 @@ const Home = () => {
             MOVIES CATEGORY
           </h3>
         </div>
-        <div className="my-2 md:my-4 flex flex-wrap gap-4 *:border *:border-primary hover:*:bg-primary hover:*:text-white *:duration-500">
+        <div className="my-4 md:my-6 flex flex-wrap gap-4 *:border *:border-primary hover:*:bg-primary hover:*:text-white *:duration-500">
           <button
             onClick={() => handleCategoriesMovies("Action")}
             className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
@@ -93,7 +93,7 @@ const Home = () => {
             <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-4 border-b-2 md:border-b-4 border-primary inline-block">
               OUR TOP MOVIES
             </h3>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-2 md:gap-4">
               <button
                 onClick={handleSort}
                 className="py-1.5 px-2 md:py-2 md:px-3 rounded-lg border border-primary text-base md:text-xl tooltip tooltip-top"
@@ -107,7 +107,7 @@ const Home = () => {
                   list === "grid"
                     ? "bg-primary text-white"
                     : "bg-white text-primary"
-                } border text-lg md:text-xl`}
+                } border text-base md:text-lg lg:text-xl`}
               >
                 <IoGrid />
               </button>
@@ -117,7 +117,7 @@ const Home = () => {
                   list === "list"
                     ? "bg-primary text-white"
                     : "bg-white text-primary"
-                } border text-lg md:text-xl`}
+                } border text-base md:text-lg lg:text-xl`}
               >
                 <FaListUl />
               </button>
