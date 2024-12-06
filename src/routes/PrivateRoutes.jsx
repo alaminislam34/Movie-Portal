@@ -5,7 +5,6 @@ import Loader from "../loader/Loader";
 
 const PrivateRoutes = ({ children }) => {
   const location = useLocation();
-  console.log(location.pathname);
 
   const { user, loading } = useContext(ProviderContext);
   if (user) {
@@ -16,7 +15,6 @@ const PrivateRoutes = ({ children }) => {
   }
   return (
     <>
-      {/* <Navigate state={location.pathname} to={`/loginPage`}></Navigate> */}
       <Navigate state={location.pathname} to={`/signin`}></Navigate>
     </>
   );

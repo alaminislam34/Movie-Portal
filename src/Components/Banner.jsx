@@ -5,19 +5,33 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FiTriangle } from "react-icons/fi";
+import b1 from "../assets/banner/b1.jpg";
+import b2 from "../assets/banner/b2.jpg";
+import b3 from "../assets/banner/b3.jpg";
+import b4 from "../assets/banner/b4.jpg";
+import b5 from "../assets/banner/b5.jpg";
+import b6 from "../assets/banner/b6.jpg";
+import b7 from "../assets/banner/b7.jpg";
+import b8 from "../assets/banner/b8.jpg";
+import b9 from "../assets/banner/b9.jpg";
+import b10 from "../assets/banner/b10.jpg";
 
 const Banner = () => {
-  const [images, setImages] = useState([]);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
-  useEffect(() => {
-    fetch("https://movie-portal-server-site.vercel.app/movies")
-      .then((res) => res.json())
-      .then((data) => {
-        setImages(data);
-      });
-  }, []);
+  const images = [
+    { b: b1 },
+    { b: b2 },
+    { b: b3 },
+    { b: b4 },
+    { b: b5 },
+    { b: b6 },
+    { b: b7 },
+    { b: b8 },
+    { b: b9 },
+    { b: b10 },
+  ];
+  console.log(images);
 
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
@@ -31,12 +45,12 @@ const Banner = () => {
   };
 
   return (
-    <div className="h-[80vh] w-full my-4 relative">
+    <div className="h-[500px] w-full md:my-4 relative">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 5000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         navigation={
@@ -60,15 +74,8 @@ const Banner = () => {
           <SwiperSlide key={index} className="h-full w-full relative">
             <img
               className="w-11/12 mx-auto h-full object-cover bg-center rounded-xl"
-              src={image.poster}
-              alt={image.title}
+              src={image.b}
             />
-            <h2 className="absolute bottom-10 right-10 md:right-20 lg:right-24 text-white text-lg md:text-xl lg:text-2xl font-semibold font-Yatra bg-primary/50 backdrop-blur-sm py-2 px-4 flex flex-col justify-center items-center rounded-lg">
-              {image.title}{" "}
-              <span className="text-sm md:text-base lg:text-lg inline-block">
-                Release Year: {image.releaseYear}
-              </span>
-            </h2>
           </SwiperSlide>
         ))}
       </Swiper>

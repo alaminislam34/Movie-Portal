@@ -85,7 +85,7 @@ const Movies = () => {
       {data.length > 0 ? (
         list === "grid" ? (
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-14">
-            {data.map((movie) => (
+            {data.slice(0, 8).map((movie) => (
               <div key={movie._id} className="bg-white shadow-xl rounded-lg">
                 <div className="relative group duration-500 overflow-hidden rounded-t-lg ">
                   <div className="h-[300px] sm:h-[400px] md:h-[420px]">
@@ -116,7 +116,7 @@ const Movies = () => {
                       {movie.genre.map((g, i) => (
                         <p
                           key={i}
-                          className="text-primary font-medium text-xs md:text-sm"
+                          className="text-gray-500 font-medium text-xs md:text-sm"
                         >
                           {g}
                         </p>

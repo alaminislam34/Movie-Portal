@@ -1,12 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiMenu2Line, RiMovie2Fill } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
-  const { user, handleLogoutUser } = useContext(ProviderContext);
+  const { user, handleLogoutUser, data, setData } = useContext(ProviderContext);
   const [show, setShow] = useState(false);
+  const [allData, setAllData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("https://movie-portal-server-site.vercel.app/movies")
+      .then((res) => res.json())
+      .then((data) => setAllData(data));
+  }, []);
+
+  const handleSearchMovies = (value) => {
+    const input = value.target.value.toLowerCase();
+    const movie = allData.filter((m) => m?.title.toLowerCase().includes(input));
+    setData(movie);
+  };
 
   return (
     <div className="h-14 md:h-20 lg:h-[88px]">
@@ -84,6 +97,7 @@ const Navbar = () => {
                 </button>
                 <div className="md:hidden">
                   <input
+                    onChange={handleSearchMovies}
                     type="text"
                     name="search"
                     className="w-full py-1.5 md:py-2 px-2 md:px-4 text-black bg-transparent border rounded-lg border-primary outline-none"
@@ -96,6 +110,7 @@ const Navbar = () => {
           <div className="md:flex w-full flex-row items-center justify-center gap-8 *:font-semibold relative hidden">
             <div className="w-full">
               <input
+                onChange={handleSearchMovies}
                 type="text"
                 name="search"
                 className="w-full py-2 lg:py-3 px-4 text-primary rounded-lg bg-white backdrop-blur-xl border-none outline-none"
