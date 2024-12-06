@@ -62,7 +62,10 @@ const Navbar = () => {
                     Add Movie
                   </NavLink>
 
-                  <NavLink className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black">
+                  <NavLink
+                    to="/favorite"
+                    className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
+                  >
                     My Favorites
                   </NavLink>
 

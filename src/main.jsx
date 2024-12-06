@@ -13,6 +13,7 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import SignUp from "./Pages/SignUp";
 import ViewDetails from "./Pages/ViewDetails";
 import AllMovies from "./Pages/AllMovies";
+import Favorite from "./Pages/Favorite";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader: () =>
+          fetch("https://movie-portal-server-site.vercel.app/movies"),
       },
       {
         path: "/allMovies",
@@ -33,6 +36,10 @@ const router = createBrowserRouter([
             <AddMovie />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/favorite",
+        element: <Favorite />,
       },
       {
         path: "/userProfile",

@@ -5,10 +5,13 @@ import { auth } from "../Firebase/firebase.config";
 export const ProviderContext = createContext();
 
 const AuthContext = ({ children }) => {
+  const [data, setData] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorite, setFavorite] = useState([]);
+  const [list, setList] = useState("grid");
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -33,6 +36,12 @@ const AuthContext = ({ children }) => {
     movies,
     loading,
     setError,
+    favorite,
+    setFavorite,
+    data,
+    setData,
+    list,
+    setList,
   };
   return (
     <ProviderContext.Provider value={info}>{children}</ProviderContext.Provider>
