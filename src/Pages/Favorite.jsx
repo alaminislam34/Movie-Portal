@@ -9,11 +9,17 @@ const Favorite = () => {
   const { user } = useContext(ProviderContext);
   const [favorite, setFavorite] = useState([]);
   const favorites = useLoaderData();
+
   useEffect(() => {
     const userEmail = user.email;
     const favoriteMovie = favorites.filter((m) => m.email === userEmail);
-    setFavorite(favoriteMovie);
-  }, []);
+
+    if (favoriteMovie.length > 0) {
+      setFavorite(favoriteMovie);
+    } else {
+      console.log("nai");
+    }
+  }, [favorites, user.email]);
 
   const handleDeleteFavorite = (id) => {
     Swal.fire({
@@ -62,7 +68,7 @@ const Favorite = () => {
           </h3>
           <div className="border-b-2 border-primary w-10"></div>
         </div>
-        {favorite ? (
+        {favorite.length > 0 ? (
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 lg:gap-6">
             {favorite.map((m) => (
               <div

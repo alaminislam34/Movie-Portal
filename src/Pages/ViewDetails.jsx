@@ -43,7 +43,6 @@ const ViewDetails = () => {
       summary,
     };
 
-    // Make the API request directly
     fetch("http://localhost:5000/favorites", {
       method: "POST",
       headers: {
@@ -52,11 +51,7 @@ const ViewDetails = () => {
       body: JSON.stringify(favorite),
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("add hoynai.");
-        } else {
-          res.json();
-        }
+        res.json();
       })
       .then((data) => {
         if (data.insertedId > 0) {
@@ -83,7 +78,7 @@ const ViewDetails = () => {
         }
       })
       .catch((error) => {
-        console.error("Error:", error); // Catch any errors
+        console.error("Error:", error);
       });
   };
 
@@ -103,7 +98,6 @@ const ViewDetails = () => {
   } = data;
 
   const handleDeleteFavorite = (id) => {
-    // Show confirmation alert first
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -113,9 +107,7 @@ const ViewDetails = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      // If the user confirms the delete operation
       if (result.isConfirmed) {
-        // Then, send the delete request to the server
         fetch(`https://movie-portal-server-site.vercel.app/favorites/${id}`, {
           method: "DELETE",
           headers: {
@@ -130,11 +122,10 @@ const ViewDetails = () => {
                 text: "Your movie has been deleted.",
                 icon: "success",
               });
-              setFavorite((prev) => prev.filter((m) => m._id !== id)); // Update state
+              setFavorite((prev) => prev.filter((m) => m._id !== id));
             }
           });
       } else {
-        // If cancelled, show cancellation message (optional)
         Swal.fire({
           title: "Cancelled",
           text: "Your movie is safe.",
