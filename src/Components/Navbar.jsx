@@ -76,6 +76,13 @@ const Navbar = () => {
                   </NavLink>
 
                   <NavLink
+                    to="/trendingMovies"
+                    className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
+                  >
+                    Trending Movies
+                  </NavLink>
+
+                  <NavLink
                     to="/favorite"
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >

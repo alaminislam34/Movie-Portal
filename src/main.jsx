@@ -16,6 +16,7 @@ import AllMovies from "./Pages/AllMovies";
 import Favorite from "./Pages/Favorite";
 import MovieUpdate from "./Pages/MovieUpdate";
 import InvalidPage from "./Pages/InvalidPage";
+import TrendingMovies from "./Pages/TrendingMovies";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             <AddMovie />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/trendingMovies",
+        element: <TrendingMovies />,
       },
       {
         path: "/updateMovie/:id",
