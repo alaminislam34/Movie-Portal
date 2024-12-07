@@ -11,7 +11,6 @@ const Movies = () => {
   const { favorite, setFavorite, data, setData, list } =
     useContext(ProviderContext);
   const navigate = useNavigate();
-  console.log(favorite);
 
   // const handleFavorite = (movie) => {
   //   const exit = favorite.find((m) => m._id === movie._id);

@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
 import { ProviderContext } from "../Provider/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const AllMovies = () => {
-  const { data } = useContext(ProviderContext);
+  const data = useLoaderData();
   const navigate = useNavigate();
 
   return (

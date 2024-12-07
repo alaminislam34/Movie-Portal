@@ -1,38 +1,40 @@
-import { useContext, useEffect, useState } from "react";
-import { ProviderContext } from "../Provider/AuthContext";
 import noMovie from "../assets/noMovies.jpg";
 import { useLoaderData } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
+import { useContext, useEffect, useState } from "react";
+import { ProviderContext } from "../Provider/AuthContext";
 
 const Favorite = () => {
+  const { user } = useContext(ProviderContext);
   const [favorite, setFavorite] = useState([]);
+  const favorites = useLoaderData();
   useEffect(() => {
-    fetch("https://movie-portal-server-site.vercel.app/favorites")
-      .then((res) => res.json())
-      .then((data) => setFavorite(data));
+    const userEmail = user.email;
+    const favoriteMovie = favorites.filter((m) => m.email === userEmail);
+    setFavorite(favoriteMovie);
   }, []);
-  console.log(favorite);
+
   const handleDeleteFavorite = (id) => {
-    fetch(`https://movie-portal-server-site.vercel.app/favorites/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-          }).then((result) => {
-            if (result.isConfirmed) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://movie-portal-server-site.vercel.app/favorites/${id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
@@ -41,8 +43,14 @@ const Favorite = () => {
               setFavorite((prev) => prev.filter((m) => m._id !== id));
             }
           });
-        }
-      });
+      } else {
+        Swal.fire({
+          title: "Cancelled",
+          text: "Your Movie is save",
+          icon: "info",
+        });
+      }
+    });
   };
 
   return (
@@ -54,7 +62,7 @@ const Favorite = () => {
           </h3>
           <div className="border-b-2 border-primary w-10"></div>
         </div>
-        {favorite.length > 0 ? (
+        {favorite ? (
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 lg:gap-6">
             {favorite.map((m) => (
               <div
@@ -65,24 +73,24 @@ const Favorite = () => {
                   <div className="">
                     <img
                       className="aspect-square object-cover bg-center bg-no-repeat rounded-t-lg"
-                      src={m.movie.poster}
+                      src={m.poster}
                       alt=""
                     />
                   </div>
                   <div className="space-y-2 py-2 pr-2">
                     <h3 className="text-lg md:text-xl lg:text-2xl font-semibold">
-                      {m.movie.title}
+                      {m.title}
                     </h3>
                     <p className="text-gray-500 text-xs md:text-sm lg:text-base">
-                      {m.movie.genre.map((g, i) => (
+                      {m.genre.map((g, i) => (
                         <span key={i}>{g}, </span>
                       ))}
                     </p>
                     <div className="*:text-xs md:*:text-sm lg:*:text-base lg:grid grid-cols-2 justify-start items-center">
-                      <p>{m.movie.duration} minute</p>
+                      <p>{m.duration} minute</p>
                       <p>
-                        {m.movie.releaseYear < 2025
-                          ? `Release Year: ${m.movie.releaseYear}`
+                        {m.releaseYear < 2025
+                          ? `Release Year: ${m.releaseYear}`
                           : "Coming soon.."}
                       </p>
                     </div>
@@ -91,9 +99,7 @@ const Favorite = () => {
                         <input
                           key={index}
                           className={`mask mask-star-2 ${
-                            index < m.movie.rating
-                              ? "bg-orange-400"
-                              : "bg-gray-300"
+                            index < m.rating ? "bg-orange-400" : "bg-gray-300"
                           } `}
                         />
                       ))}
@@ -113,9 +119,12 @@ const Favorite = () => {
             ))}
           </section>
         ) : (
-          <div>
-            <div className="w-10/12 md:w-8/12 lg:w-6/12 mx-auto flex justify-center items-center">
-              <img src={noMovie} alt="" />
+          <div className="mb-12">
+            <div className="w-10/12 md:w-8/12 lg:w-6/12 mx-auto flex flex-col justify-center items-center">
+              <img className="w-10/12 mx-auto" src={noMovie} alt="" />
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-center">
+                No Favorite Movies ☹️‼️
+              </h2>
             </div>
           </div>
         )}

@@ -4,31 +4,62 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
 
 const ViewDetails = () => {
   const data = useLoaderData();
-  const { favorite, setFavorite, setData } = useContext(ProviderContext);
+  const { setData } = useContext(ProviderContext);
   const navigate = useNavigate();
 
   // handle favorite
   const handleFavorite = (movie) => {
-    const exit = favorite.find((m) => m._id === movie._id);
-    if (!exit) {
-      // Make the API request directly
-      fetch("https://movie-portal-server-site.vercel.app/favorites", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ movie }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
+    console.log(movie);
+    const {
+      poster,
+      title,
+      director,
+      country,
+      genre,
+      rating,
+      budget,
+      email,
+      releaseYear,
+      language,
+      duration,
+      summary,
+    } = movie;
+    const favorite = {
+      poster,
+      title,
+      director,
+      language,
+      genre,
+      country,
+      rating,
+      releaseYear,
+      email,
+      duration,
+      budget,
+      summary,
+    };
 
-          // Update the favorite list
-          // const exits = data
-          setFavorite([...favorite, movie]);
+    // Make the API request directly
+    fetch("http://localhost:5000/favorites", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(favorite),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("add hoynai.");
+        } else {
+          res.json();
+        }
+      })
+      .then((data) => {
+        if (data.insertedId > 0) {
           toast(
             <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
               <IoMdCheckmarkCircle className="text-white text-lg" />
@@ -49,30 +80,11 @@ const ViewDetails = () => {
               },
             }
           );
-        })
-        .catch((err) => console.error("Error adding favorite:", err));
-    } else {
-      toast(
-        <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-          <RxCrossCircled className="text-white text-lg" />
-          <p>Already Movie Added</p>
-        </div>,
-        {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-          style: {
-            backgroundColor: "#FF0800",
-          },
         }
-      );
-    }
+      })
+      .catch((error) => {
+        console.error("Error:", error); // Catch any errors
+      });
   };
 
   const {
@@ -80,44 +92,56 @@ const ViewDetails = () => {
     poster,
     title,
     director,
+    language,
+    country,
     genre,
     rating,
+    budget,
     releaseYear,
     duration,
     summary,
   } = data;
 
-  const handleDeleteMovie = (id) => {
-    fetch(`https://movie-portal-server-site.vercel.app/movies/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-          }).then((result) => {
-            if (result.isConfirmed) {
+  const handleDeleteFavorite = (id) => {
+    // Show confirmation alert first
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      // If the user confirms the delete operation
+      if (result.isConfirmed) {
+        // Then, send the delete request to the server
+        fetch(`https://movie-portal-server-site.vercel.app/favorites/${id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
-                text: "Your file has been deleted.",
+                text: "Your movie has been deleted.",
                 icon: "success",
               });
-              navigate("/allMovies");
-              setData((prev) => prev.filter((m) => m._id !== id));
+              setFavorite((prev) => prev.filter((m) => m._id !== id)); // Update state
             }
           });
-        }
-      });
+      } else {
+        // If cancelled, show cancellation message (optional)
+        Swal.fire({
+          title: "Cancelled",
+          text: "Your movie is safe.",
+          icon: "info",
+        });
+      }
+    });
   };
 
   return (
@@ -135,7 +159,7 @@ const ViewDetails = () => {
           <FaBackward /> Back
         </Link>
       </div>
-      <section className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 lg:gap-8 p-2 md:p-4">
+      <section className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 p-2 md:p-4">
         <div className="md:col-span-3">
           <img
             className="w-full h-full object-cover bg-center"
@@ -143,44 +167,61 @@ const ViewDetails = () => {
             alt=""
           />
         </div>
-        <div className="md:col-span-2 flex justify-center items-center">
-          <div className="space-y-2 md:space-y-4">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+        <div className="md:col-span-2 flex justify-center items-center ">
+          <div className="">
+            {/* Movie details table */}
+            <h2 className="border-t border-x border-gray-500 text-left py-3 md:py-4 text-xl md:text-2xl lg:text-3xl font-semibold px-3">
               {title}
-            </h3>
-            <h4 className="text-lg md:text-xl">
-              Movie Director:{" "}
-              <span className="italic font-medium">{director}</span>
-            </h4>
-            <p className="text-gray-600">
-              <span className="font-medium">Category: </span>{" "}
-              {genre.map((g, i) => (
-                <span key={i} className="italic">
-                  {" "}
-                  {g},
-                </span>
-              ))}
-            </p>
-            <div className="rating rating-md">
-              {Array.from({ length: 5 }, (_, index) => (
-                <input
-                  key={index}
-                  className={`mask mask-star-2 ${
-                    index < rating ? "bg-orange-400" : "bg-gray-300"
-                  } `}
-                />
-              ))}
-            </div>
-            <div className="grid grid-cols-2 justify-start items-center">
-              <p>Duration: {duration} minute</p>
-              <p>
-                {releaseYear < 2025
-                  ? `Release Year: ${releaseYear}`
-                  : "Coming Soon.."}
-              </p>
-            </div>
-            <p>{summary}</p>
-            <div className="flex flex-row justify-between gap-4">
+            </h2>
+            <table className="table-auto">
+              <tbody className="">
+                <tr>
+                  <td>Director: </td>
+                  <td>{director}</td>
+                </tr>
+                <tr>
+                  <td>Released:</td>
+                  <td>{releaseYear < 2025 ? releaseYear : "Coming soon"}</td>
+                </tr>
+                <tr>
+                  <td>Runtime: </td>
+                  <td>{duration} minute</td>
+                </tr>
+                <tr>
+                  <td>Genre : </td>
+                  <td>
+                    {genre.map((g, i) => (
+                      <span key={i}> {g}, </span>
+                    ))}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Actors: </td>
+                  <td>N/A</td>
+                </tr>
+                <tr>
+                  <td>Language: </td>
+                  <td>{language} </td>
+                </tr>
+                <tr>
+                  <td>Country: </td>
+                  <td>{country}</td>
+                </tr>
+                <tr>
+                  <td>Rating: </td>
+                  <td>{rating}</td>
+                </tr>
+                <tr>
+                  <td>Budget: </td>
+                  <td>{budget} million</td>
+                </tr>
+                <tr>
+                  <td>Summary: </td>
+                  <td>{summary}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="flex flex-row justify-between gap-4 mt-3 md:mt-4">
               <button
                 onClick={() => handleFavorite(data)}
                 className="w-28 md:w-32 py-1.5 md:py-2 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
@@ -188,7 +229,7 @@ const ViewDetails = () => {
                 Add Favorite
               </button>
               <button
-                onClick={() => handleDeleteMovie(_id)}
+                onClick={() => handleDeleteFavorite(_id)}
                 className="py-1.5 md:py-2 px-3 md:px-4 text-sm md:text-base border border-primary duration-700 text-white bg-primary hover:bg-red-700 flex flex-row gap-2 justify-center items-center rounded-lg"
               >
                 Delete Movie <RiDeleteBin6Line />
@@ -196,7 +237,10 @@ const ViewDetails = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </section>
+      <br />
+      <br />
     </div>
   );
 };

@@ -28,6 +28,8 @@ const router = createBrowserRouter([
       {
         path: "/allMovies",
         element: <AllMovies />,
+        loader: () =>
+          fetch("https://movie-portal-server-site.vercel.app/movies"),
       },
       {
         path: "/addMovie",
@@ -44,6 +46,7 @@ const router = createBrowserRouter([
             <Favorite />
           </PrivateRoutes>
         ),
+        loader: () => fetch("http://localhost:5000/favorites"),
       },
       {
         path: "/userProfile",

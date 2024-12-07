@@ -19,6 +19,11 @@ svg.star-svg {
 body {
   font-family: "Poppins", sans-serif;
 }
+table tbody tr,
+td {
+  border: 1px solid gray;
+  padding: 8px 14px;
+}
 
 .slider {
   display: flex;
