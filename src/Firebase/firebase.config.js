@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCL9YkJPBzAEq5m3sp4Vm6r8BpnGFH0PpI",
-  authDomain: "movienest-a10.firebaseapp.com",
-  projectId: "movienest-a10",
-  storageBucket: "movienest-a10.firebasestorage.app",
-  messagingSenderId: "447354280698",
-  appId: "1:447354280698:web:272421a6c89c34ee30c743",
+  apiKey: import.meta.env.DATA_apiKey,
+  authDomain: import.meta.env.DATA_authDomain,
+  projectId: import.meta.env.DATA_projectId,
+  storageBucket: import.meta.env.DATA_storageBucket,
+  messagingSenderId: import.meta.env.DATA_messagingSenderId,
+  appId: import.meta.env.DATA_appId,
 };
 
 // Initialize Firebase
