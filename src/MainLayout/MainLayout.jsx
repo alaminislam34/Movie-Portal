@@ -19,7 +19,7 @@ const MainLayout = () => {
       ) : (
         <div>
           <Navbar />
-          <section className="max-w-[1380px] mx-auto overflow-hidden min-h-[80vh]">
+          <section className="max-w-[1380px] mx-auto overflow-hidden min-h-[85vh]">
             <Outlet />
           </section>
           <Footer />

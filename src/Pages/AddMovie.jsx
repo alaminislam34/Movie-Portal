@@ -68,10 +68,10 @@ const AddMovie = () => {
   };
 
   return (
-    <div className="flex justify-center items-center my-12 updateMovieInfo">
+    <div className="flex justify-center items-center py-10 md:py-14 lg:py-16 updateMovieInfo bg-backImg object-cover">
       <form
         onSubmit={handleSubmit(handleOnSubmit)}
-        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl"
+        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl bg-transparent backdrop-blur-xl text-white"
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold my-2 md:my-4 text-center">
           Add Movie
@@ -79,11 +79,13 @@ const AddMovie = () => {
         <div className="grid sm:grid-cols-2 gap-4">
           {/* title */}
           <label htmlFor="title" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">Movie Title</span>
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
+              Movie Title
+            </span>
             <input
               type="text"
               placeholder="Enter movie title"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("title", {
                 required: "Title is required",
                 minLength: {
@@ -100,11 +102,13 @@ const AddMovie = () => {
           </label>
           {/* Movie Poster */}
           <label htmlFor="poster" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">Poster URL</span>
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
+              Poster URL
+            </span>
             <input
               type="text"
               placeholder="Enter poster url"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("poster", { required: "Poster URL is required" })}
             />
             {errors.poster && (
@@ -117,13 +121,13 @@ const AddMovie = () => {
         <div className="grid sm:grid-cols-2 gap-4">
           {/* Movie Director */}
           <label htmlFor="director" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
               Movie Director
             </span>
             <input
               type="text"
               placeholder="Enter director name"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("director", {
                 required: "Movie director is required",
                 minLength: {
@@ -140,11 +144,13 @@ const AddMovie = () => {
           </label>
           {/* Movie Actors */}
           <label htmlFor="actors" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">Actors Name</span>
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
+              Actors Name
+            </span>
             <input
               type="text"
               placeholder="Enter actors name"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("actors", {
                 required: "Movie actors is required",
                 minLength: {
@@ -163,13 +169,13 @@ const AddMovie = () => {
         <div className="grid sm:grid-cols-2 gap-4">
           {/* Movie Language */}
           <label htmlFor="language" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
               Movie Language
             </span>
             <input
               type="text"
               placeholder="Enter movie language"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("language", {
                 required: "Movie language is required",
                 minLength: {
@@ -186,14 +192,14 @@ const AddMovie = () => {
           </label>
           {/* Movie Runtime */}
           <label htmlFor="runtime" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
               Movie Duration{" "}
               <span className="text-xs md:text-sm">( in minutes )</span>
             </span>
             <input
               type="number"
               placeholder="Enter movie duration"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("runTime", {
                 required: "Movie duration is required",
                 valueAsNumber: true,
@@ -210,20 +216,22 @@ const AddMovie = () => {
         <div className="grid sm:grid-cols-2 gap-4">
           {/* Movie Release Year */}
           <label htmlFor="release year" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
               Movie Release Year
             </span>
             <select
               type="number"
               placeholder="Enter movie duration"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("releaseYear", {
                 required: "Release year is required",
                 valueAsNumber: true,
               })}
             >
               {years.map((year, i) => (
-                <option key={i}>{year}</option>
+                <option key={i} className="text-black">
+                  {year}
+                </option>
               ))}
             </select>
             {errors.releaseYear && (
@@ -234,11 +242,13 @@ const AddMovie = () => {
           </label>
           {/* movie rating */}
           <label htmlFor="rating" className="flex flex-col gap-2">
-            <span className="text-lg md:text-xl font-medium">Movie Rating</span>
+            <span className="text-base md:text-lg lg:text-xl font-medium ">
+              Movie Rating
+            </span>
             <input
               type="number"
               placeholder="Enter movie rating"
-              className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("rating", {
                 required: "Movie rating is required",
                 valueAsNumber: true,
@@ -253,7 +263,9 @@ const AddMovie = () => {
         </div>
         {/* Movie Genre */}
         <label htmlFor="genre" className="flex flex-col gap-2">
-          <span className="text-lg md:text-xl font-medium">Movie Genre</span>
+          <span className="text-base md:text-lg lg:text-xl font-medium ">
+            Movie Genre
+          </span>
           <Controller
             name="genre"
             control={control}
@@ -273,6 +285,20 @@ const AddMovie = () => {
                     selected ? selected.map((option) => option.value) : []
                   )
                 }
+                styles={{
+                  menu: (provided) => ({
+                    ...provided,
+                    color: "black",
+                  }),
+                  control: (provided) => ({
+                    ...provided,
+                    backgroundColor: "transparent",
+                  }),
+                  placeholder: (provided) => ({
+                    ...provided,
+                    color: "#c0c0c0",
+                  }),
+                }}
               />
             )}
           />
@@ -282,13 +308,15 @@ const AddMovie = () => {
         </label>
         {/* movie summary */}
         <label htmlFor="summary" className="flex flex-col gap-2">
-          <span className="text-lg md:text-xl font-medium">Movie Title</span>
+          <span className="text-base md:text-lg lg:text-xl font-medium ">
+            Movie Summary
+          </span>
           <textarea
             type="text"
             cols={5}
             rows={5}
             placeholder="Enter movie title"
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+            className="py-1.5 md:py-2 px-3 md:px-4 bg-transparent placeholder:text-gray-300 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
             {...register("summary", {
               required: "At least 10 character is required",
               minLength: {

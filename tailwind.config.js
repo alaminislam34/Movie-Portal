@@ -9,6 +9,7 @@ export default {
       backgroundImage: {
         movie: "url(../src/assets/movies2.jpg)",
         bgMovie: "url(../src/assets/moviebg.jpg)",
+        backImg: "url(../src/assets/banner/bg.avif)",
       },
     },
     fontFamily: {

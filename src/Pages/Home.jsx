@@ -12,10 +12,22 @@ import p6 from "../assets/partners/p6.jpg";
 import { RiSortDesc } from "react-icons/ri";
 import { ProviderContext } from "../Provider/AuthContext";
 import { useLoaderData } from "react-router-dom";
+import { FaR } from "react-icons/fa6";
+import { GoTriangleRight } from "react-icons/go";
 
 const Home = () => {
   const { data, setData, setList, list } = useContext(ProviderContext);
   const allData = useLoaderData();
+
+  // genre movie
+  const action = allData.filter((m) => m.genre.includes("Action"));
+  const horror = allData.filter((m) => m.genre.includes("Horror"));
+  const comedy = allData.filter((m) => m.genre.includes("Comedy"));
+  const romance = allData.filter((m) => m.genre.includes("Romance"));
+  const thriller = allData.filter((m) => m.genre.includes("Thriller"));
+  const sci_fi = allData.filter((m) => m.genre.includes("Sci-Fi"));
+  const adventure = allData.filter((m) => m.genre.includes("Adventure"));
+  const Drama = allData.filter((m) => m.genre.includes("Drama"));
 
   const handleCategoriesMovies = (category) => {
     const categoryMovie = allData.filter((m) => m.genre.includes(category));
@@ -31,59 +43,74 @@ const Home = () => {
         <Banner />
       </section>
       <section className="w-11/12 mx-auto my-12">
-        <div className="flex flex-col justify-start items-center border">
+        <div className="flex flex-col justify-start items-center">
           <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-left inline-block w-full py-4 border-b-2 border-primary">
             MOVIES CATEGORY
           </h3>
         </div>
         <div className="my-4 md:my-6 flex flex-wrap gap-4 *:border *:border-primary hover:*:bg-primary hover:*:text-white *:duration-500">
           <button
-            onClick={() => handleCategoriesMovies("Action")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            onClick={() => setData(allData)}
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Action
+            <GoTriangleRight className="text-lg md:text-xl" /> All{" "}
+            {allData.length}
+          </button>
+          <button
+            onClick={() => handleCategoriesMovies("Action")}
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
+          >
+            <GoTriangleRight className="text-lg md:text-xl" /> Action{" "}
+            {action.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Comedy")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Comedy
+            <GoTriangleRight className="text-lg md:text-xl" /> Comedy{" "}
+            {comedy.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Drama")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Drama
+            <GoTriangleRight className="text-lg md:text-xl" /> Drama{" "}
+            {Drama.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Horror")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Horror
+            <GoTriangleRight className="text-lg md:text-xl" /> Horror{" "}
+            {horror.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Adventure")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Adventure
+            <GoTriangleRight className="text-lg md:text-xl" /> Adventure{" "}
+            {adventure.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Thriller")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Thriller
+            <GoTriangleRight className="text-lg md:text-xl" /> Thriller{" "}
+            {thriller.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Sci-fi")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Science Fiction
+            <GoTriangleRight className="text-lg md:text-xl" /> Science Fiction{" "}
+            {sci_fi.length}
           </button>
           <button
             onClick={() => handleCategoriesMovies("Romance")}
-            className="py-1.5 md:py-2 px-3 md:px-4 border rounded-lg"
+            className="py-1.5 md:py-2 px-3 md:px-4 border rounded flex flex-row gap-1 items-center"
           >
-            Romance
+            <GoTriangleRight className="text-lg md:text-xl" /> Romance{" "}
+            {romance.length}
           </button>
         </div>
       </section>
