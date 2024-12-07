@@ -93,7 +93,7 @@ const Favorite = () => {
                       ))}
                     </p>
                     <div className="*:text-xs md:*:text-sm lg:*:text-base lg:grid grid-cols-2 justify-start items-center">
-                      <p>{m.duration} minute</p>
+                      <p>{m.runTime} minute</p>
                       <p>
                         {m.releaseYear < 2025
                           ? `Release Year: ${m.releaseYear}`

@@ -15,6 +15,7 @@ import ViewDetails from "./Pages/ViewDetails";
 import AllMovies from "./Pages/AllMovies";
 import Favorite from "./Pages/Favorite";
 import MovieUpdate from "./Pages/MovieUpdate";
+import InvalidPage from "./Pages/InvalidPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
           fetch(
             `https://movie-portal-server-site.vercel.app/movies/${params.id}`
           ),
+      },
+      {
+        path: "/*",
+        element: <InvalidPage />,
       },
     ],
   },

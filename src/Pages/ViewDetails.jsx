@@ -16,10 +16,10 @@ const ViewDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/favorites")
+    fetch("https://movie-portal-server-site.vercel.app/favorites")
       .then((res) => res.json())
       .then((data) => setFavorite(data));
-  }, []);
+  }, [favorites]);
   // handle favorite
   const handleFavorite = (movie) => {
     const {
@@ -48,61 +48,62 @@ const ViewDetails = () => {
       summary,
     };
 
-    const exist = favorites.find((f) => f.title === movie.title);
-    if (!exist) {
-      fetch("http://localhost:5000/favorites", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(favorite),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.insertedId > 0) {
-            toast(
-              <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-                <IoMdCheckmarkCircle className="text-white text-lg" />
-                <p>Add to Favorite</p>
-              </div>,
-              {
-                position: "top-right",
-                autoClose: 4000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-                style: {
-                  backgroundColor: "#55DD33",
-                },
-              }
-            );
+    const exist = favorites.some(
+      (f) => f.title.toLowerCase() === movie.title.toLowerCase()
+    );
+
+    if (favorites.length > 0) {
+      if (exist) {
+        toast(
+          <div className="flex flex-row gap-2 items-center  text-base lg:text-lg">
+            <RxCrossCircled className="text-primary text-lg" />
+            <p>Already Added </p>
+          </div>,
+          {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
           }
-        });
-    } else {
-      toast(
-        <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-          <RxCrossCircled className="text-white text-lg" />
-          <p>Already Added </p>
-        </div>,
-        {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-          style: {
-            backgroundColor: "#ff4444",
+        );
+      } else {
+        fetch("https://movie-portal-server-site.vercel.app/favorites", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
           },
-        }
-      );
+          body: JSON.stringify(favorite),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              toast(
+                <div className="flex flex-row gap-2 items-center text-base lg:text-lg">
+                  <IoMdCheckmarkCircle className="text-green-500 text-lg" />
+                  <p>Add to Favorite</p>
+                </div>,
+                {
+                  position: "top-right",
+                  autoClose: 4000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  transition: Bounce,
+                }
+              );
+            }
+          });
+      }
+    } else {
+      toast(<p>Your Favorites list empty</p>);
     }
   };
 
