@@ -1,28 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaBackward } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
-import { toast, ToastContainer } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import { FaStar } from "react-icons/fa";
+import { IoMdCheckmarkCircle } from "react-icons/io";
+import { RxCrossCircled } from "react-icons/rx";
 
 const ViewDetails = () => {
   const data = useLoaderData();
   const { user, setData } = useContext(ProviderContext);
+  const [favorites, setFavorite] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch("http://localhost:5000/favorites")
+      .then((res) => res.json())
+      .then((data) => setFavorite(data));
+  }, []);
   // handle favorite
   const handleFavorite = (movie) => {
-    console.log(movie);
     const {
       poster,
       title,
       director,
-      country,
       genre,
       rating,
-      budget,
       releaseYear,
       language,
       duration,
@@ -36,52 +41,69 @@ const ViewDetails = () => {
       director,
       language,
       genre,
-      country,
       email,
       rating,
       releaseYear,
       duration,
-      budget,
       summary,
     };
 
-    fetch("https://movie-portal-server-site.vercel.app/favorites", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(favorite),
-    })
-      .then((res) => {
-        res.json();
+    const exist = favorites.find((f) => f.title === movie.title);
+    if (!exist) {
+      fetch("http://localhost:5000/favorites", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(favorite),
       })
-      .then((data) => {
-        if (data.insertedId > 0) {
-          toast(
-            <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-              <IoMdCheckmarkCircle className="text-white text-lg" />
-              <p>Add Favorite List</p>
-            </div>,
-            {
-              position: "top-right",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-              style: {
-                backgroundColor: "#55DD33",
-              },
-            }
-          );
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId > 0) {
+            toast(
+              <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
+                <IoMdCheckmarkCircle className="text-white text-lg" />
+                <p>Add to Favorite</p>
+              </div>,
+              {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                style: {
+                  backgroundColor: "#55DD33",
+                },
+              }
+            );
+          }
+        });
+    } else {
+      toast(
+        <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
+          <RxCrossCircled className="text-white text-lg" />
+          <p>Already Added </p>
+        </div>,
+        {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          style: {
+            backgroundColor: "#ff4444",
+          },
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      );
+    }
   };
 
   const {

@@ -30,7 +30,7 @@ const Navbar = () => {
             <div className="drawer-content">
               <label
                 htmlFor="my-drawer"
-                className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 py-1 px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
+                className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 sm:py-1 sm:px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
               >
                 <RiMenu2Line className="text-xl md:text-xl lg:text-2xl" />
               </label>
