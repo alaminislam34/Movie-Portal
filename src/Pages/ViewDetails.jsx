@@ -5,10 +5,11 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
+import { FaStar } from "react-icons/fa";
 
 const ViewDetails = () => {
   const data = useLoaderData();
-  const { setData } = useContext(ProviderContext);
+  const { user, setData } = useContext(ProviderContext);
   const navigate = useNavigate();
 
   // handle favorite
@@ -22,12 +23,13 @@ const ViewDetails = () => {
       genre,
       rating,
       budget,
-      email,
       releaseYear,
       language,
       duration,
       summary,
     } = movie;
+
+    const email = user.email;
     const favorite = {
       poster,
       title,
@@ -35,15 +37,15 @@ const ViewDetails = () => {
       language,
       genre,
       country,
+      email,
       rating,
       releaseYear,
-      email,
       duration,
       budget,
       summary,
     };
 
-    fetch("http://localhost:5000/favorites", {
+    fetch("https://movie-portal-server-site.vercel.app/favorites", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -88,16 +90,15 @@ const ViewDetails = () => {
     title,
     director,
     language,
-    country,
     genre,
     rating,
-    budget,
+    actors,
     releaseYear,
-    duration,
+    runTime,
     summary,
   } = data;
 
-  const handleDeleteFavorite = (id) => {
+  const handleDeleteMovie = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -108,7 +109,7 @@ const ViewDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://movie-portal-server-site.vercel.app/favorites/${id}`, {
+        fetch(`https://movie-portal-server-site.vercel.app/movies/${id}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
@@ -116,13 +117,16 @@ const ViewDetails = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
+
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your movie has been deleted.",
                 icon: "success",
               });
-              setFavorite((prev) => prev.filter((m) => m._id !== id));
+              navigate("/allMovies");
+              setData((prev) => prev.filter((m) => m._id !== id));
             }
           });
       } else {
@@ -176,7 +180,7 @@ const ViewDetails = () => {
                 </tr>
                 <tr>
                   <td>Runtime: </td>
-                  <td>{duration} minute</td>
+                  <td>{runTime} minute</td>
                 </tr>
                 <tr>
                   <td>Genre : </td>
@@ -188,23 +192,17 @@ const ViewDetails = () => {
                 </tr>
                 <tr>
                   <td>Actors: </td>
-                  <td>N/A</td>
+                  <td>{actors}</td>
                 </tr>
                 <tr>
                   <td>Language: </td>
                   <td>{language} </td>
                 </tr>
                 <tr>
-                  <td>Country: </td>
-                  <td>{country}</td>
-                </tr>
-                <tr>
                   <td>Rating: </td>
-                  <td>{rating}</td>
-                </tr>
-                <tr>
-                  <td>Budget: </td>
-                  <td>{budget} million</td>
+                  <td className="flex flex-row gap-2 items-center">
+                    {rating} (<FaStar className="text-xs" />)
+                  </td>
                 </tr>
                 <tr>
                   <td>Summary: </td>
@@ -220,7 +218,13 @@ const ViewDetails = () => {
                 Add Favorite
               </button>
               <button
-                onClick={() => handleDeleteFavorite(_id)}
+                onClick={() => navigate("/updateMovie")}
+                className="w-28 md:w-32 py-1.5 md:py-2 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
+              >
+                Update Movie
+              </button>
+              <button
+                onClick={() => handleDeleteMovie(_id)}
                 className="py-1.5 md:py-2 px-3 md:px-4 text-sm md:text-base border border-primary duration-700 text-white bg-primary hover:bg-red-700 flex flex-row gap-2 justify-center items-center rounded-lg"
               >
                 Delete Movie <RiDeleteBin6Line />

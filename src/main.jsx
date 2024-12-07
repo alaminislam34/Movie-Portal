@@ -14,6 +14,7 @@ import SignUp from "./Pages/SignUp";
 import ViewDetails from "./Pages/ViewDetails";
 import AllMovies from "./Pages/AllMovies";
 import Favorite from "./Pages/Favorite";
+import MovieUpdate from "./Pages/MovieUpdate";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,13 +41,18 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/updateMovie",
+        element: <MovieUpdate />,
+      },
+      {
         path: "/favorite",
         element: (
           <PrivateRoutes>
             <Favorite />
           </PrivateRoutes>
         ),
-        loader: () => fetch("http://localhost:5000/favorites"),
+        loader: () =>
+          fetch("https://movie-portal-server-site.vercel.app/favorites"),
       },
       {
         path: "/userProfile",

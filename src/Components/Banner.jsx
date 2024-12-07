@@ -31,7 +31,6 @@ const Banner = () => {
     { b: b9 },
     { b: b10 },
   ];
-  console.log(images);
 
   const progressCircle = useRef(null);
   const progressContent = useRef(null);

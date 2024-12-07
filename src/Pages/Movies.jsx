@@ -8,71 +8,9 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 
 const Movies = () => {
-  const { favorite, setFavorite, data, setData, list } =
-    useContext(ProviderContext);
+  const { data, setData, list } = useContext(ProviderContext);
   const navigate = useNavigate();
 
-  // const handleFavorite = (movie) => {
-  //   const exit = favorite.find((m) => m._id === movie._id);
-  //   if (!exit) {
-  //     useEffect(() => {
-  //       fetch("http://localhost:5000/favorites", {
-  //         method: "POST",
-  //         headers: {
-  //           "content-type": "application/json",
-  //         },
-  //         body: JSON.stringify({ user, movie }),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data);
-
-  //           setFavorite([...favorite, movie]);
-  //           toast(
-  //             <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-  //               <IoMdCheckmarkCircle className="text-white text-lg" />
-  //               <p>Add Favorite List</p>
-  //             </div>,
-  //             {
-  //               position: "top-right",
-  //               autoClose: 4000,
-  //               hideProgressBar: false,
-  //               closeOnClick: true,
-  //               pauseOnHover: true,
-  //               draggable: true,
-  //               progress: undefined,
-  //               theme: "light",
-  //               transition: Bounce,
-  //               style: {
-  //                 backgroundColor: "#55DD33",
-  //               },
-  //             }
-  //           );
-  //         });
-  //     }, [setData]);
-  //   } else {
-  //     toast(
-  //       <div className="flex flex-row gap-2 items-center text-white text-base lg:text-lg">
-  //         <RxCrossCircled className="text-white text-lg" />
-  //         <p>Already Movie Add</p>
-  //       </div>,
-  //       {
-  //         position: "top-right",
-  //         autoClose: 4000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //         transition: Bounce,
-  //         style: {
-  //           backgroundColor: "#FF0800",
-  //         },
-  //       }
-  //     );
-  //   }
-  // };
   useEffect(() => {
     fetch("https://movie-portal-server-site.vercel.app/movies")
       .then((res) => res.json())
@@ -167,7 +105,7 @@ const Movies = () => {
                     </p>
                   </div>
                   <div className="rating rating-md">
-                    {Array.from({ length: 5 }, (_, index) => (
+                    {Array.from({ length: 10 }, (_, index) => (
                       <input
                         key={index}
                         className={`mask mask-star-2 ${

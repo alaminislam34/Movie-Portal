@@ -1,8 +1,7 @@
-import Swal from "sweetalert2";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 
-const AddMovie = () => {
+const MovieUpdate = () => {
   const {
     register,
     handleSubmit,
@@ -34,7 +33,6 @@ const AddMovie = () => {
     { value: "Thriller", label: "Thriller" },
     { value: "Sci-Fi", label: "Sci-Fi" },
     { value: "Romance", label: "Romance" },
-    { value: "Animation", label: "Animation" },
   ];
 
   //   release year set
@@ -46,25 +44,8 @@ const AddMovie = () => {
 
   // Movie Add handle
   const handleOnSubmit = (e) => {
-    fetch("https://movie-portal-server-site.vercel.app/movies", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(e),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Success!",
-            text: "Movies Added Successfully",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-        }
-        reset();
-      });
+    alert(JSON.stringify(e, null, 2));
+    reset();
   };
 
   return (
@@ -74,7 +55,7 @@ const AddMovie = () => {
         className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl"
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold my-2 md:my-4 text-center">
-          Add Movie
+          Update Movie Information
         </h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {/* title */}
@@ -219,7 +200,6 @@ const AddMovie = () => {
               className="py-1.5 md:py-2 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("releaseYear", {
                 required: "Release year is required",
-                valueAsNumber: true,
               })}
             >
               {years.map((year, i) => (
@@ -316,7 +296,7 @@ const AddMovie = () => {
           <div>
             <input
               type="submit"
-              value="Add Movie"
+              value="Update Movie"
               className="py-1.5 md:py-3 px-3 md:px-4 w-full bg-primary text-white hover:bg-red-700 duration-500 cursor-pointer"
             />
           </div>
@@ -326,4 +306,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default MovieUpdate;

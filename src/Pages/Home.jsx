@@ -91,7 +91,7 @@ const Home = () => {
         <div className="md:col-span-2 lg:col-span-3">
           <div className="border-b-2 my-4 md:my-8 lg:my-12 md:mx-4 flex justify-between items-center">
             <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-4 border-b-2 md:border-b-4 border-primary inline-block">
-              OUR TOP MOVIES
+              OUR FEATURED MOVIES
             </h3>
             <div className="flex flex-row gap-2 md:gap-4">
               <button

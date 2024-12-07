@@ -25,6 +25,14 @@ td {
   padding: 8px 14px;
 }
 
+.updateMovieInfo form label input,
+div,
+select,
+Select,
+textarea {
+  font-size: 15px;
+}
+
 .slider {
   display: flex;
   animation: scroll 15s linear infinite;
