@@ -10,6 +10,7 @@ export default {
         movie: "url(../src/assets/movies2.jpg)",
         bgMovie: "url(../src/assets/moviebg.jpg)",
         backImg: "url(../src/assets/banner/bg.avif)",
+        trending: "url(../src/assets/trendingBg.jpg)",
       },
     },
     fontFamily: {

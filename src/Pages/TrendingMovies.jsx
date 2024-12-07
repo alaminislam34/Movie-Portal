@@ -42,7 +42,7 @@ const TrendingMovies = () => {
   return (
     <div>
       <section className="grid grid-cols-1">
-        <div className="bg-backImg">
+        <div className="bg-trending">
           <div className="w-full h-full bg-black/50 py-6 md:py-10 lg:py-12">
             <div className="flex justify-center items-center mb-6 md:mb-12">
               <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold py-3 inline border-b-2 border-primary text-white px-4">
@@ -118,7 +118,7 @@ const TrendingMovies = () => {
         </div>
         <br />
         <br />
-        <div className="">
+        <div className="flex justify-center items-center">
           <div className="h-[500px] w-full m-4 md:my-6 lg:my-12 relative">
             <Swiper
               spaceBetween={30}

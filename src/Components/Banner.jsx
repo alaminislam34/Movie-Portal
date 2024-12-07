@@ -44,7 +44,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="h-[500px] w-full md:my-4 relative">
+    <div className="h-[500px] w-full md:py-4 relative">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
