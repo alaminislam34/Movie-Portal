@@ -1,7 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import Select from "react-select";
+import Swal from "sweetalert2";
 
 const MovieUpdate = () => {
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
@@ -44,8 +48,30 @@ const MovieUpdate = () => {
 
   // Movie Add handle
   const handleOnSubmit = (e) => {
-    alert(JSON.stringify(e, null, 2));
-    reset();
+    console.log(e);
+    const updateMovie = e;
+    const movieId = id;
+
+    fetch(`https://movie-portal-server-site.vercel.app/movies/${movieId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateMovie),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success",
+            text: "Movie Update Successfully",
+            icon: "success",
+          });
+          reset();
+        }
+      });
   };
 
   return (

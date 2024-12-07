@@ -162,7 +162,7 @@ const ViewDetails = () => {
             alt=""
           />
         </div>
-        <div className="md:col-span-2 flex justify-center items-center ">
+        <div className="md:col-span-2 flex justify-start ">
           <div className="">
             {/* Movie details table */}
             <h2 className="border-t border-x border-gray-500 text-left py-3 md:py-4 text-xl md:text-2xl lg:text-3xl font-semibold px-3">
@@ -210,16 +210,16 @@ const ViewDetails = () => {
                 </tr>
               </tbody>
             </table>
-            <div className="flex flex-row justify-between gap-4 mt-3 md:mt-4">
+            <div className="flex flex-wrap gap-4 mt-3 md:mt-4">
               <button
                 onClick={() => handleFavorite(data)}
-                className="w-28 md:w-32 py-1.5 md:py-2 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
+                className="py-1.5 md:py-2 px-3 md:px-4 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
               >
                 Add Favorite
               </button>
               <button
-                onClick={() => navigate("/updateMovie")}
-                className="w-28 md:w-32 py-1.5 md:py-2 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
+                onClick={() => navigate(`/updateMovie/${_id}`)}
+                className="py-1.5 md:py-2 px-3 md:px-4 text-sm md:text-base border border-primary duration-700 text-primary hover:text-white hover:bg-primary rounded-lg"
               >
                 Update Movie
               </button>
