@@ -41,7 +41,7 @@ const MainLayout = () => {
           <div
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className={`fixed duration-1000 z-10 cursor-pointer ${
-              up ? "bottom-5" : "-bottom-96"
+              up ? "bottom-16" : "-bottom-96"
             } right-10 bg-primary flex justify-center items-center p-2 md:p-4 text-xl md:text-2xl rounded-full text-white`}
           >
             <FiTriangle />{" "}

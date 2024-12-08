@@ -159,8 +159,8 @@ const Movies = () => {
               </section>
             )
           ) : (
-            <div>
-              <div className="w-10/12 md:w-8/12 lg:w-6/12 mx-auto flex justify-center items-center">
+            <div className="w-full h-full flex justify-center items-center">
+              <div className="w-8/12 md:w-6/12 lg:w-4/12 mx-auto flex justify-center items-center">
                 <img src={noMovie} alt="" />
               </div>
             </div>
