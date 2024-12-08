@@ -17,7 +17,8 @@ import { GoTriangleRight } from "react-icons/go";
 import PageLoader from "../Components/PageLoader";
 
 const Home = () => {
-  const { data, setData, setList, list, loading } = useContext(ProviderContext);
+  const { data, setData, setList, list, loading, theme } =
+    useContext(ProviderContext);
   const allData = useLoaderData();
 
   // genre movie
@@ -138,7 +139,7 @@ const Home = () => {
                     className={`py-1.5 px-2 md:py-2 md:px-3 rounded-lg duration-700 ${
                       list === "grid"
                         ? "bg-primary text-white"
-                        : "bg-white text-primary"
+                        : " text-primary"
                     } border text-base md:text-lg lg:text-xl`}
                   >
                     <IoGrid />
@@ -148,7 +149,7 @@ const Home = () => {
                     className={`py-1.5 px-2 md:py-2 md:px-3 rounded-lg duration-700 ${
                       list === "list"
                         ? "bg-primary text-white"
-                        : "bg-white text-primary"
+                        : " text-primary"
                     } border text-base md:text-lg lg:text-xl`}
                   >
                     <FaListUl />
@@ -169,46 +170,62 @@ const Home = () => {
             </div>
             <div className="slider-container flex justify-center items-center">
               <div className="my-6 py-6 md:py-8 overflow-hidden w-11/12 mx-auto relative">
-                <div className="absolute top-0 left-0 bg-gradient-to-l from-white/0 via-white/60 to-white h-full w-36 z-10"></div>
-                <div className="absolute top-0 right-0 bg-gradient-to-r from-white/0 via-white/60 to-white h-full w-36 z-10"></div>
+                <div
+                  className={`absolute top-0 left-0 bg-gradient-to-l ${
+                    theme === "light"
+                      ? "from-white/0 via-white/60 to-white"
+                      : theme === "dark"
+                      ? "from-[#1D232A]/0 via-[#1D232A]/60 to-[#1D232A]"
+                      : ""
+                  } h-full w-36 z-10`}
+                ></div>
+                <div
+                  className={`absolute top-0 right-0 bg-gradient-to-r ${
+                    theme === "light"
+                      ? "from-white/0 via-white/60 to-white"
+                      : theme === "dark"
+                      ? "from-[#1D232A]/0 via-[#1D232A]/60 to-[#1D232A]"
+                      : ""
+                  } h-full w-36 z-10`}
+                ></div>
                 <div className="slierContainer">
                   <div className="slider">
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p1} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p2} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p3} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p4} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p5} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p6} alt="" />
                     </div>
 
                     {/* slide clone */}
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p1} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p2} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p3} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p4} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p5} alt="" />
                     </div>
-                    <div className="slide">
+                    <div className="slide *:bg-white p-2">
                       <img src={p6} alt="" />
                     </div>
                   </div>

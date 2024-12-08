@@ -2,14 +2,25 @@ import { useContext, useEffect, useState } from "react";
 import { RiMenu2Line, RiMovie2Fill } from "react-icons/ri";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
+import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 
 const Navbar = () => {
-  const { user, handleLogoutUser, setData, setLoading, id } =
+  const { user, handleLogoutUser, setData, setLoading, id, theme, setTheme } =
     useContext(ProviderContext);
   const [show, setShow] = useState(false);
   const [allData, setAllData] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+
+  console.log(theme);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, [theme]);
 
   // set page title
   useEffect(() => {
@@ -73,7 +84,15 @@ const Navbar = () => {
       data-aos="fade-down"
       data-aos-duration="1000"
     >
-      <div className="bg-primary fixed top-0 left-0 w-full z-50">
+      <div
+        className={`${
+          theme === "light"
+            ? "bg-primary"
+            : theme === "dark"
+            ? "bg-[#661111]"
+            : ""
+        }  fixed top-0 left-0 w-full z-50`}
+      >
         <nav className="grid grid-cols-2 md:grid-cols-3 justify-center items-center md:py-4 py-2 text-white max-w-7xl mx-auto px-2">
           <div className="flex items-center sm:gap-1 drawer-end z-10">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -176,12 +195,12 @@ const Navbar = () => {
                 onChange={handleSearchMovies}
                 type="text"
                 name="search"
-                className="w-full py-2 lg:py-3 px-4 text-primary rounded-lg bg-white backdrop-blur-xl border-none outline-none"
+                className="w-full py-2 lg:py-3 px-4 text-primary rounded-lg border-none outline-none"
                 placeholder="Search"
               />
             </div>
           </div>
-          <div className="flex flex-row relative justify-end">
+          <div className="flex flex-row items-center gap-2 relative justify-end">
             {user ? (
               <div
                 onClick={() => setShow(!show)}
@@ -201,6 +220,24 @@ const Navbar = () => {
                 SignIn
               </button>
             )}
+            <div className="flex justify-center items-center ">
+              {theme === "light" && (
+                <button
+                  className="text-xl p-2 md:p-3"
+                  onClick={() => setTheme("dark")}
+                >
+                  <MdLightMode />
+                </button>
+              )}
+              {theme === "dark" && (
+                <button
+                  className="text-xl p-2 md:p-3"
+                  onClick={() => setTheme("light")}
+                >
+                  <MdOutlineDarkMode />
+                </button>
+              )}
+            </div>
           </div>
         </nav>
       </div>

@@ -11,6 +11,7 @@ const AuthContext = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState([]);
+  const [theme, setTheme] = useState("dark");
   const [list, setList] = useState("grid");
   const [id, setId] = useState();
 
@@ -46,6 +47,8 @@ const AuthContext = ({ children }) => {
     setList,
     id,
     setId,
+    theme,
+    setTheme,
   };
   return (
     <ProviderContext.Provider value={info}>{children}</ProviderContext.Provider>

@@ -27,7 +27,7 @@ const UserProfile = () => {
                 <h2 className="text-lg md:text-xl font-semibold">
                   Name: {user.displayName}
                 </h2>
-                <p className="text-sm md:text-base lg:text-lg">
+                <p className="text-xs md:text-sm lg:text-base">
                   Email: {user.email}
                 </p>
                 <button

@@ -20,7 +20,6 @@ const SignUp = () => {
   const [passError, setPassError] = useState(false);
   const [show, setShow] = useState(false);
 
-  console.log(loading);
 
   const navigate = useNavigate();
 

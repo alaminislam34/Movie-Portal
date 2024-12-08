@@ -5,7 +5,7 @@ import { ProviderContext } from "../Provider/AuthContext";
 import PageLoader from "../Components/PageLoader";
 
 const AllMovies = () => {
-  const { loading } = useContext(ProviderContext);
+  const { loading, theme } = useContext(ProviderContext);
   const data = useLoaderData();
   const navigate = useNavigate();
 
@@ -21,10 +21,19 @@ const AllMovies = () => {
             </h3>
             <div className="border-b-2 border-primary w-10"></div>
           </div>
-          <div className="m-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="m-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12 lg:gap-16">
             {data.length > 0 ? (
               data.map((movie) => (
-                <div key={movie._id} className="bg-white shadow-xl rounded-lg">
+                <div
+                  key={movie._id}
+                  className={`${
+                    theme === "dark"
+                      ? "bg-white/10 backdrop-blur-xl"
+                      : theme === "light"
+                      ? "shadow-xl bg-white/60"
+                      : ""
+                  } rounded-lg`}
+                >
                   <div className="relative group duration-500 overflow-hidden rounded-t-lg ">
                     <div className="h-[300px] sm:h-[400px] md:h-[420px]">
                       <img

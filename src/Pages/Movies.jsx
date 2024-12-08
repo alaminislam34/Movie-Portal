@@ -7,7 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import PageLoader from "../Components/PageLoader";
 
 const Movies = () => {
-  const { data, setData, list, loading, setId } = useContext(ProviderContext);
+  const { data, setData, list, loading, setId, theme } =
+    useContext(ProviderContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +29,13 @@ const Movies = () => {
                 {data.slice(0, 8).map((movie) => (
                   <div
                     key={movie._id}
-                    className="bg-white shadow-xl rounded-lg"
+                    className={`${
+                      theme === "dark"
+                        ? "bg-white/10 backdrop-blur-xl"
+                        : theme === "light"
+                        ? "shadow-xl bg-white/60"
+                        : ""
+                    } rounded-lg`}
                     data-aos="fade-up"
                     data-aos-duration="5000"
                   >
@@ -99,7 +106,13 @@ const Movies = () => {
                 {data.map((movie) => (
                   <div
                     key={movie._id}
-                    className="bg-white shadow-xl rounded-lg grid grid-cols-2 gap-2 md:gap-4 border"
+                    className={`${
+                      theme === "dark"
+                        ? "bg-white/10 backdrop-blur-xl"
+                        : theme === "light"
+                        ? "shadow-xl bg-white border"
+                        : ""
+                    } rounded-lg grid grid-cols-2 gap-2 md:gap-6 `}
                   >
                     <div className="rounded-t-lg h-[240px] md:h-[260px] lg:h-[300px]">
                       <img

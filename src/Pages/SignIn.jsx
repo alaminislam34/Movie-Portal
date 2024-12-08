@@ -18,7 +18,6 @@ const SignIn = () => {
   const [show, setShow] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(loading);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -27,7 +26,6 @@ const SignIn = () => {
     const password = form.password.value;
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        console.log(result);
         setUser(result.user);
         Swal.fire({
           title: "Success!",
