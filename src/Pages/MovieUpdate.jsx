@@ -53,7 +53,6 @@ const MovieUpdate = () => {
 
   // Movie Add handle
   const handleOnSubmit = (e) => {
-    console.log(e);
     const updateMovie = e;
     const movieId = id;
 
@@ -66,8 +65,6 @@ const MovieUpdate = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success",

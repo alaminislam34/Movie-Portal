@@ -62,6 +62,8 @@ const Navbar = () => {
   }, []);
 
   const handleSearchMovies = (value) => {
+    console.log(allData, value);
+
     const input = value.target.value.toLowerCase();
     const movie = allData.filter((m) => m?.title.toLowerCase().includes(input));
     setData(movie);

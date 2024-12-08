@@ -17,8 +17,7 @@ const Favorite = () => {
 
     if (favoriteMovie.length > 0) {
       setFavorite(favoriteMovie);
-    } else {
-      console.log("nai");
+      return;
     }
   }, [favorites, user.email]);
 
