@@ -33,8 +33,7 @@ textarea {
   font-size: 15px;
 }
 
-
-.slierContainer{
+.slierContainer {
   display: flex;
   position: relative;
 }
@@ -45,7 +44,6 @@ textarea {
   position: relative;
   animation: scroll 20s linear infinite;
 }
-
 
 .slider:hover {
   animation-play-state: paused;

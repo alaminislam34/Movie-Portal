@@ -50,9 +50,9 @@ const Navbar = () => {
   const handleLoading = (path) => {
     setLoading(true);
     setTimeout(() => {
-      navigate(path);
       setLoading(false);
-    }, 2000);
+      navigate(path);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -62,15 +62,17 @@ const Navbar = () => {
   }, []);
 
   const handleSearchMovies = (value) => {
-    console.log(allData, value);
-
     const input = value.target.value.toLowerCase();
     const movie = allData.filter((m) => m?.title.toLowerCase().includes(input));
     setData(movie);
   };
 
   return (
-    <div className="h-12 md:h-16 lg:h-[79px]">
+    <div
+      className="h-12 md:h-16 lg:h-[79px]"
+      data-aos="fade-down"
+      data-aos-duration="1000"
+    >
       <div className="bg-primary fixed top-0 left-0 w-full z-50">
         <nav className="grid grid-cols-2 md:grid-cols-3 justify-center items-center md:py-4 py-2 text-white max-w-7xl mx-auto px-2">
           <div className="flex items-center sm:gap-1 drawer-end z-10">

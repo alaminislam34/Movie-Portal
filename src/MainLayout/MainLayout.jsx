@@ -40,11 +40,11 @@ const MainLayout = () => {
           <Footer />
           <div
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className={`fixed duration-1000 z-10 cursor-pointer ${
-              up ? "bottom-16" : "-bottom-96"
-            } right-10 bg-primary flex justify-center items-center p-2 md:p-4 text-xl md:text-2xl rounded-full text-white`}
+            className={`fixed duration-1000 z-30 cursor-pointer ${
+              up ? "bottom-10 md:bottom-16" : "-bottom-96"
+            } md:right-10 right-5 bg-primary flex justify-center items-center p-2 md:p-4 text-xl md:text-2xl rounded-full text-white`}
           >
-            <FiTriangle />{" "}
+            <FiTriangle />
           </div>
         </div>
       )}

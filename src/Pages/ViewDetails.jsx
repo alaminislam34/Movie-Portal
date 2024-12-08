@@ -20,7 +20,7 @@ const ViewDetails = () => {
     fetch("https://movie-portal-server-site.vercel.app/favorites")
       .then((res) => res.json())
       .then((data) => setFavorite(data));
-  }, [favorites]);
+  }, []);
   // handle favorite
   const handleFavorite = (movie) => {
     const {
@@ -31,7 +31,7 @@ const ViewDetails = () => {
       rating,
       releaseYear,
       language,
-      duration,
+      runTime,
       summary,
     } = movie;
 
@@ -45,16 +45,17 @@ const ViewDetails = () => {
       email,
       rating,
       releaseYear,
-      duration,
+      runTime,
       summary,
     };
 
-    const exist = favorites.some(
-      (f) => f.title.toLowerCase() === movie.title.toLowerCase()
+    const exactMatch = favorites.some(
+      (f) =>
+        f.title.toLowerCase() === movie.title.toLowerCase() && f.email === email
     );
 
     if (favorites.length > 0) {
-      if (exist) {
+      if (exactMatch) {
         toast(
           <div className="flex flex-row gap-2 items-center  text-base lg:text-lg">
             <RxCrossCircled className="text-primary text-lg" />
@@ -83,6 +84,7 @@ const ViewDetails = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) {
+              setFavorite((prev) => [...prev, favorite]);
               toast(
                 <div className="flex flex-row gap-2 items-center text-base lg:text-lg">
                   <IoMdCheckmarkCircle className="text-green-500 text-lg" />
@@ -141,8 +143,6 @@ const ViewDetails = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",

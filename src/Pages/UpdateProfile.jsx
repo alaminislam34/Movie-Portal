@@ -1,5 +1,7 @@
 import { updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../Firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -13,11 +15,14 @@ const UpdateProfile = () => {
       photoURL: photoURL,
     })
       .then(() => {
+        Swal.fire({
+          title: "Update!",
+          text: "Profile Update Successfully",
+          icon: "success",
+        });
         navigate("/userProfile");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(() => {});
   };
   return (
     <div className="bg-movie w-full h-[80vh] object-cover bg-center flex justify-center items-center">
@@ -50,7 +55,7 @@ const UpdateProfile = () => {
           <div className="w-full">
             <button
               type="submit"
-              className="btn h-full w-full bg-primary hover:bg-darkPri"
+              className="btn h-full w-full bg-primary hover:bg-red-600 text-white border-none duration-500"
             >
               Update
             </button>
@@ -60,7 +65,7 @@ const UpdateProfile = () => {
             <Link
               to="/userProfile"
               type="button"
-              className="text-right py-1 px-2"
+              className="text-right text-white py-1 px-2"
             >
               Profile
             </Link>

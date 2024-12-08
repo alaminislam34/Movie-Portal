@@ -29,6 +29,8 @@ const Movies = () => {
                   <div
                     key={movie._id}
                     className="bg-white shadow-xl rounded-lg"
+                    data-aos="fade-up"
+                    data-aos-duration="5000"
                   >
                     <div className="relative group duration-500 overflow-hidden rounded-t-lg ">
                       <div className="h-[300px] sm:h-[400px] md:h-[420px]">

@@ -95,7 +95,7 @@ const Favorite = () => {
                           <span key={i}>{g}, </span>
                         ))}
                       </p>
-                      <div className="*:text-xs md:*:text-sm lg:*:text-base lg:grid grid-cols-2 justify-start items-center">
+                      <div className="*:text-xs md:*:text-sm lg:*:text-base *:text-gray-500 lg:grid grid-cols-2 justify-start items-center">
                         <p>{m.runTime} minute</p>
                         <p>
                           {m.releaseYear < 2025
@@ -103,15 +103,26 @@ const Favorite = () => {
                             : "Coming soon.."}
                         </p>
                       </div>
-                      <div className="rating rating-md">
-                        {Array.from({ length: 5 }, (_, index) => (
-                          <input
-                            key={index}
-                            className={`mask mask-star-2 ${
-                              index < m.rating ? "bg-orange-400" : "bg-gray-300"
-                            } `}
-                          />
-                        ))}
+                      <div className="rating rating-sm flex items-center">
+                        <span>({m.rating} )</span>
+                        {Array.from({ length: 10 }, (_, index) => {
+                          const isFullStar = index < Math.floor(m.rating);
+                          const isHalfStar =
+                            index === Math.floor(m.rating) &&
+                            m.rating % 1 >= 0.5;
+                          return (
+                            <input
+                              key={index}
+                              className={`mask mask-star ${
+                                isFullStar
+                                  ? "bg-orange-400"
+                                  : isHalfStar
+                                  ? "bg-orange-200"
+                                  : "bg-gray-300"
+                              } `}
+                            />
+                          );
+                        })}
                       </div>
                       <div className="w-full flex justify-start py-2">
                         <button
