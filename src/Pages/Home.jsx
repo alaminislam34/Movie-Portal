@@ -122,8 +122,12 @@ const Home = () => {
           </section>
           <section className="w-11/12 mx-auto my-12">
             <div className="md:col-span-2 lg:col-span-3">
-              <div className="border-b-2 my-4 md:my-8 lg:my-12 md:mx-4 flex justify-between items-center">
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-4 border-b-2 md:border-b-4 border-primary inline-block">
+              <div
+                className={`border-b-2 ${
+                  theme === "dark" ? "border-primary" : ""
+                } my-4 md:my-8 lg:my-12 md:mx-4 flex justify-between items-center`}
+              >
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-4 inline-block">
                   OUR FEATURED MOVIES
                 </h3>
                 <div className="flex flex-row gap-2 md:gap-4">
@@ -163,10 +167,13 @@ const Home = () => {
           {/* extra section 1 */}
           <section className="my-10 md:my-12 lg:my-16">
             <div className="flex justify-center flex-col items-center">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold py-2 border-b-2">
+              <h3
+                className={`text-xl md:text-2xl lg:text-3xl font-semibold py-2 border-b-2 ${
+                  theme === "light" ? "border-primary" : ""
+                }`}
+              >
                 OUR PARTNER'S
               </h3>
-              <div className="border-b-4 border-primary w-10"></div>
             </div>
             <div className="slider-container flex justify-center items-center">
               <div className="my-6 py-6 md:py-8 overflow-hidden w-11/12 mx-auto relative">

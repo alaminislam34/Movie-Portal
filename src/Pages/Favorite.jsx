@@ -86,7 +86,7 @@ const Favorite = () => {
                         alt=""
                       />
                     </div>
-                    <div className="space-y-2 py-2 pr-2">
+                    <div className="space-y-2 p-2">
                       <h3 className="text-lg md:text-xl lg:text-2xl font-semibold">
                         {m.title}
                       </h3>
