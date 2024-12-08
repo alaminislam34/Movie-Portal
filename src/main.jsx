@@ -17,6 +17,8 @@ import Favorite from "./Pages/Favorite";
 import MovieUpdate from "./Pages/MovieUpdate";
 import InvalidPage from "./Pages/InvalidPage";
 import TrendingMovies from "./Pages/TrendingMovies";
+import ResetPassword from "./Pages/ResetPassword";
+import UpdateProfile from "./Pages/UpdateProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -73,8 +75,20 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/updateProfile",
+        element: (
+          <PrivateRoutes>
+            <UpdateProfile />
+          </PrivateRoutes>
+        ),
+      },
+      {
         path: "/signin",
         element: <SignIn />,
+      },
+      {
+        path: "/resetPass",
+        element: <ResetPassword />,
       },
       {
         path: "/signup",

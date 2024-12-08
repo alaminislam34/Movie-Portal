@@ -1,13 +1,59 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RiMenu2Line, RiMovie2Fill } from "react-icons/ri";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ProviderContext } from "../Provider/AuthContext";
 
 const Navbar = () => {
-  const { user, handleLogoutUser, data, setData } = useContext(ProviderContext);
+  const { user, handleLogoutUser, setData, setLoading, id } =
+    useContext(ProviderContext);
   const [show, setShow] = useState(false);
   const [allData, setAllData] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // set page title
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        document.title = "MovieNest";
+        break;
+      case "/signin":
+        document.title = "MovieNest || Login";
+        break;
+      case "/signUp":
+        document.title = "MovieNest || Sign Up";
+        break;
+      case "/allMovies":
+        document.title = "All Movies";
+        break;
+      case "/addMovie":
+        document.title = "Add Movie";
+        break;
+      case "/favorite":
+        document.title = "Favorite Movies";
+        break;
+      case `/viewDetails/${id}`:
+        document.title = "Movie Details";
+        break;
+      case `/updateMovie/${id}`:
+        document.title = "Favorite Movies";
+        break;
+      case `/resetPass`:
+        document.title = "Password Reset";
+        break;
+      case `/trendingMovies`:
+        document.title = "Trending Movies";
+        break;
+    }
+  }, [location.pathname, id]);
+
+  const handleLoading = (path) => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate(path);
+      setLoading(false);
+    }, 2000);
+  };
 
   useEffect(() => {
     fetch("https://movie-portal-server-site.vercel.app/movies")
@@ -39,7 +85,7 @@ const Navbar = () => {
               <button className="static drawer-button"></button>
             </div>
             <h2
-              onClick={() => navigate("/")}
+              onClick={() => handleLoading("/")}
               className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-1 cursor-pointer"
             >
               <RiMovie2Fill /> MovieNest
@@ -51,46 +97,52 @@ const Navbar = () => {
                 className="drawer-overlay"
               ></label>
               <div className="p-4 md:p-6 flex flex-col min-h-full translate-x-6 hover:text-primary md:w-1/3 bg-white/80 text-primary overflow-hidden">
-                <h2 className="flex flex-row gap-1 items-center text-xl md:text-2xl lg:text-3xl font-bold">
+                <h2
+                  onClick={() => handleLoading("/")}
+                  className="flex flex-row gap-1 items-center text-xl md:text-2xl lg:text-3xl font-bold"
+                >
                   <RiMovie2Fill /> MovieNest
                 </h2>
                 <ul
                   className="*:text-base *:md:text-lg flex flex-col gap-2 md:gap-3 lg:gap-4 p-4 md:p-6 my-4 md:my-6 
               *:font-semibold *:py-2"
                 >
-                  <NavLink className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black">
+                  <NavLink
+                    onClick={() => handleLoading("/")}
+                    className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
+                  >
                     Home
                   </NavLink>
                   <NavLink
-                    to="/allMovies"
+                    onClick={() => handleLoading("/allMovies")}
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >
                     All Movies
                   </NavLink>
 
                   <NavLink
-                    to="/addMovie"
+                    onClick={() => handleLoading("/addMovie")}
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >
                     Add Movie
                   </NavLink>
 
                   <NavLink
-                    to="/trendingMovies"
+                    onClick={() => handleLoading("/trendingMovies")}
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >
                     Trending Movies
                   </NavLink>
 
                   <NavLink
-                    to="/favorite"
+                    onClick={() => handleLoading("/favorite")}
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >
                     My Favorites
                   </NavLink>
 
                   <NavLink
-                    to="/userProfile"
+                    onClick={() => handleLoading("/userProfile")}
                     className="hover:scale-110 duration-500 hover:translate-x-6 hover:text-primary text-black"
                   >
                     Profile
@@ -139,7 +191,7 @@ const Navbar = () => {
               </div>
             ) : (
               <button
-                onClick={() => navigate("/signin")}
+                onClick={() => handleLoading("/signin")}
                 className="py-1.5 md:py-2 px-2 md:px-4 bg-[#d12222] rounded-md text-sm md:text-base"
               >
                 SignIn

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import Footer from "../Pages/Footer";
 import PageLoader from "../Components/PageLoader";
 import { useEffect, useState } from "react";
+import Footer from "../Components/Footer";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const MainLayout = () => {
       ) : (
         <div>
           <Navbar />
-          <section className="max-w-[1380px] mx-auto overflow-hidden min-h-[85vh]">
+          <section className="max-w-[1380px] mx-auto overflow-hidden min-h-[80vh]">
             <Outlet />
           </section>
           <Footer />

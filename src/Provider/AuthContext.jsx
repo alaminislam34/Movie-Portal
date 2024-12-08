@@ -12,6 +12,7 @@ const AuthContext = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState([]);
   const [list, setList] = useState("grid");
+  const [id, setId] = useState();
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -35,6 +36,7 @@ const AuthContext = ({ children }) => {
     setMovies,
     movies,
     loading,
+    setLoading,
     setError,
     favorite,
     setFavorite,
@@ -42,6 +44,8 @@ const AuthContext = ({ children }) => {
     setData,
     list,
     setList,
+    id,
+    setId,
   };
   return (
     <ProviderContext.Provider value={info}>{children}</ProviderContext.Provider>
