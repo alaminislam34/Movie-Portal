@@ -80,7 +80,7 @@ const MovieUpdate = () => {
     <div className="flex justify-center items-center py-10 md:py-14 lg:py-16 updateMovieInfo bg-backImg object-cover">
       <form
         onSubmit={handleSubmit(handleOnSubmit)}
-        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl bg-transparent backdrop-blur-xl text-white"
+        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl bg-transparent/30 backdrop-blur-2xl text-white"
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold my-2 md:my-4 text-center">
           Update Movie Information
@@ -104,7 +104,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.title && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.title.message}
               </span>
             )}
@@ -121,7 +121,7 @@ const MovieUpdate = () => {
               {...register("poster", { required: "Poster URL is required" })}
             />
             {errors.poster && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.poster.message}
               </span>
             )}
@@ -146,7 +146,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.director && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.director.message}
               </span>
             )}
@@ -169,7 +169,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.actors && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.actors.message}
               </span>
             )}
@@ -194,7 +194,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.language && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.language.message}
               </span>
             )}
@@ -216,7 +216,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.runTime && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.runTime.message}
               </span>
             )}
@@ -243,7 +243,7 @@ const MovieUpdate = () => {
               ))}
             </select>
             {errors.releaseYear && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.releaseYear.message}
               </span>
             )}
@@ -263,7 +263,7 @@ const MovieUpdate = () => {
               })}
             />
             {errors.rating && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.rating.message}
               </span>
             )}
@@ -308,7 +308,7 @@ const MovieUpdate = () => {
             )}
           />
           {errors.genre && (
-            <span className="text-red-500 text-sm">{errors.genre.message}</span>
+            <span className="text-red-400 text-sm">{errors.genre.message}</span>
           )}
         </label>
         {/* movie summary */}
@@ -331,7 +331,7 @@ const MovieUpdate = () => {
             })}
           />
           {errors.summary && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-400 text-sm">
               {errors.summary.message}
             </span>
           )}
@@ -350,7 +350,7 @@ const MovieUpdate = () => {
             <input
               type="submit"
               value="Update Movie"
-              className="py-1.5 md:py-3 px-3 md:px-4 w-full bg-primary text-white hover:bg-red-700 duration-500 cursor-pointer"
+              className="py-1.5 md:py-3 px-3 md:px-4 w-full bg-primary text-white hover:bg-red-700 duration-400 cursor-pointer"
             />
           </div>
         </div>

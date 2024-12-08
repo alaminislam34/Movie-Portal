@@ -163,42 +163,49 @@ const Home = () => {
           <div className="border-b-4 border-primary w-10"></div>
         </div>
         <div className="slider-container flex justify-center items-center">
-          <div className="my-6 py-6 md:py-8 overflow-hidden w-11/12 md:w-8/12 mx-auto">
-            <div className="slider">
-              <div className="slide">
-                <img src={p1} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p2} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p3} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p4} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p5} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p6} alt="" />
-              </div>
+          <div className="my-6 py-6 md:py-8 overflow-hidden w-11/12 mx-auto relative">
+            <div className="absolute top-0 left-0 bg-gradient-to-l from-white/0 via-white/60 to-white h-full w-36 z-10"></div>
+            <div className="absolute top-0 right-0 bg-gradient-to-r from-white/0 via-white/60 to-white h-full w-36 z-10"></div>
+            <div className="slierContainer">
+              <div className="slider">
+                <div className="slide">
+                  <img src={p1} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p2} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p3} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p4} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p5} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p6} alt="" />
+                </div>
 
-              {/* slide clone */}
-              <div className="slide">
-                <img src={p2} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p3} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p4} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p5} alt="" />
-              </div>
-              <div className="slide">
-                <img src={p6} alt="" />
+                {/* slide clone */}
+                <div className="slide">
+                  <img src={p1} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p2} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p3} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p4} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p5} alt="" />
+                </div>
+                <div className="slide">
+                  <img src={p6} alt="" />
+                </div>
               </div>
             </div>
           </div>

@@ -41,15 +41,26 @@ const AllMovies = () => {
                 <h2 className="text-lg md:text-xl my-2 font-semibold">
                   {movie.title}
                 </h2>
-                <div className="rating rating-md">
-                  {Array.from({ length: 5 }, (_, index) => (
-                    <input
-                      key={index}
-                      className={`mask mask-star-2 ${
-                        index < movie.rating ? "bg-orange-400" : "bg-gray-300"
-                      } `}
-                    />
-                  ))}
+                <div className="rating rating-sm flex items-center">
+                  <span>({movie.rating} )</span>
+                  {Array.from({ length: 10 }, (_, index) => {
+                    const isFullStar = index < Math.floor(movie.rating);
+                    const isHalfStar =
+                      index === Math.floor(movie.rating) &&
+                      movie.rating % 1 >= 0.5;
+                    return (
+                      <input
+                        key={index}
+                        className={`mask mask-star ${
+                          isFullStar
+                            ? "bg-orange-400"
+                            : isHalfStar
+                            ? "bg-orange-200"
+                            : "bg-gray-300"
+                        } `}
+                      />
+                    );
+                  })}
                 </div>
                 <div className="flex flex-row items-center gap-2 py-2 mt-2 border-t">
                   <p className="flex flex-wrap items-center gap-2">

@@ -71,7 +71,7 @@ const AddMovie = () => {
     <div className="flex justify-center items-center py-10 md:py-14 lg:py-16 updateMovieInfo bg-backImg object-cover">
       <form
         onSubmit={handleSubmit(handleOnSubmit)}
-        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl bg-transparent backdrop-blur-xl text-white"
+        className="p-4 md:p-6 rounded-lg flex flex-col gap-4 md:gap-6 w-10/12 md:w-10/12 lg:w-8/12 mx-auto border shadow-xl bg-transparent/30 backdrop-blur-xl text-white"
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold my-2 md:my-4 text-center">
           Add Movie
@@ -95,7 +95,7 @@ const AddMovie = () => {
               })}
             />
             {errors.title && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.title.message}
               </span>
             )}
@@ -112,7 +112,7 @@ const AddMovie = () => {
               {...register("poster", { required: "Poster URL is required" })}
             />
             {errors.poster && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.poster.message}
               </span>
             )}
@@ -137,7 +137,7 @@ const AddMovie = () => {
               })}
             />
             {errors.director && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.director.message}
               </span>
             )}
@@ -160,7 +160,7 @@ const AddMovie = () => {
               })}
             />
             {errors.actors && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.actors.message}
               </span>
             )}
@@ -185,7 +185,7 @@ const AddMovie = () => {
               })}
             />
             {errors.language && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.language.message}
               </span>
             )}
@@ -207,7 +207,7 @@ const AddMovie = () => {
               })}
             />
             {errors.runTime && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.runTime.message}
               </span>
             )}
@@ -235,7 +235,7 @@ const AddMovie = () => {
               ))}
             </select>
             {errors.releaseYear && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.releaseYear.message}
               </span>
             )}
@@ -247,6 +247,7 @@ const AddMovie = () => {
             </span>
             <input
               type="number"
+              step={0.1}
               placeholder="Enter movie rating"
               className="py-1.5 md:py-2 bg-transparent placeholder:text-gray-300 px-3 md:px-4 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
               {...register("rating", {
@@ -255,7 +256,7 @@ const AddMovie = () => {
               })}
             />
             {errors.rating && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-400 text-sm">
                 {errors.rating.message}
               </span>
             )}
@@ -303,7 +304,7 @@ const AddMovie = () => {
             )}
           />
           {errors.genre && (
-            <span className="text-red-500 text-sm">{errors.genre.message}</span>
+            <span className="text-red-400 text-sm">{errors.genre.message}</span>
           )}
         </label>
         {/* movie summary */}
@@ -326,7 +327,7 @@ const AddMovie = () => {
             })}
           />
           {errors.summary && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-400 text-sm">
               {errors.summary.message}
             </span>
           )}
@@ -336,7 +337,7 @@ const AddMovie = () => {
             <button
               onClick={() => reset()}
               type="button"
-              className=" underline text-primary font-medium"
+              className=" underline text-primary"
             >
               Reset
             </button>

@@ -48,6 +48,28 @@ const Movies = () => {
                   <h2 className="text-lg md:text-xl my-2 font-semibold">
                     {movie.title}
                   </h2>
+                  <div className="rating rating-sm flex items-center">
+                    <span>({movie.rating} )</span>
+                    {Array.from({ length: 10 }, (_, index) => {
+                      const isFullStar = index < Math.floor(movie.rating);
+                      const isHalfStar =
+                        index === Math.floor(movie.rating) &&
+                        movie.rating % 1 >= 0.5;
+                      return (
+                        <input
+                          key={index}
+                          className={`mask mask-star ${
+                            isFullStar
+                              ? "bg-orange-400"
+                              : isHalfStar
+                              ? "bg-orange-200"
+                              : "bg-gray-300"
+                          } `}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="divider my-2"></div>
                   <div className="flex flex-row items-center gap-2">
                     <p className="flex flex-wrap items-center gap-2">
                       {movie.genre.map((g, i) => (
@@ -60,16 +82,6 @@ const Movies = () => {
                       ))}
                     </p>
                   </div>
-                  <div className="rating rating-md">
-                    {Array.from({ length: 5 }, (_, index) => (
-                      <input
-                        key={index}
-                        className={`mask mask-star-2 ${
-                          index < movie.rating ? "bg-orange-400" : "bg-gray-300"
-                        } `}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             ))}
@@ -81,17 +93,33 @@ const Movies = () => {
                 key={movie._id}
                 className="bg-white shadow-xl rounded-lg grid grid-cols-2 gap-2 md:gap-4 border"
               >
-                <div className="rounded-t-lg h-[250px] md:h-[260px] lg:h-[300px]">
+                <div className="rounded-t-lg h-[240px] md:h-[260px] lg:h-[300px]">
                   <img
                     className="object-cover bg-center bg-no-repeat w-full h-full rounded-l-lg"
                     src={movie.poster}
                     alt=""
                   />
                 </div>
-                <div className="p-3 md:p-4 flex flex-col justify-center items-center gap-4">
-                  <h2 className="text-lg md:text-xl w-full font-semibold">
+                <div className="py-3 md:py-4 pl-2 flex flex-col justify-start items-center gap-2 md:gap-3 lg:gap-4">
+                  <h2 className="text-base sm:text-lg md:text-xl w-full font-semibold">
                     {movie.title}
                   </h2>
+                  <div className="rating rating-xs lg:rating-sm flex justify-start w-full">
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <input
+                        key={index}
+                        className={`mask mask-star ${
+                          index < movie.rating ? "bg-orange-400" : "bg-gray-300"
+                        } `}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-left w-full text-gray-500 font-medium text-xs md:text-sm">
+                    Released: {movie.releaseYear}
+                  </p>
+                  <p className="text-left w-full text-gray-500 font-medium text-xs md:text-sm">
+                    Runtime: {movie.runTime} minutes
+                  </p>
                   <div className="flex flex-row items-center gap-2 w-full">
                     <p className="flex flex-wrap items-center gap-2">
                       {movie.genre.map((g, i) => (
@@ -104,20 +132,11 @@ const Movies = () => {
                       ))}
                     </p>
                   </div>
-                  <div className="rating rating-md">
-                    {Array.from({ length: 10 }, (_, index) => (
-                      <input
-                        key={index}
-                        className={`mask mask-star-2 ${
-                          index < movie.rating ? "bg-orange-400" : "bg-gray-300"
-                        } `}
-                      />
-                    ))}
-                  </div>
-                  <div className="">
+
+                  <div className="flex justify-start w-full">
                     <Link
                       to={`/viewDetails/${movie._id}`}
-                      className="w-28 md:w-32 text-sm md:text-base py-1.5 md:py-2 border border-primary text-primary hover:text-white hover:bg-primary inline-block text-center"
+                      className="px-3 md:px-4 text-sm py-1.5 md:py-2 border border-primary text-primary hover:text-white hover:bg-primary duration-500 inline-block text-center"
                     >
                       View Details
                     </Link>
