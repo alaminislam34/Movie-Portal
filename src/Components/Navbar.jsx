@@ -79,11 +79,7 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className="h-12 md:h-16 lg:h-[79px]"
-      data-aos="fade-down"
-      data-aos-duration="1000"
-    >
+    <div className="h-12 md:h-16" data-aos="fade-down" data-aos-duration="1000">
       <div
         className={`${
           theme === "light"
@@ -93,10 +89,10 @@ const Navbar = () => {
             : ""
         }  fixed top-0 left-0 w-full z-50`}
       >
-        <nav className="grid grid-cols-2 md:grid-cols-3 justify-center items-center md:py-4 py-2 text-white max-w-7xl mx-auto px-2">
-          <div className="flex items-center sm:gap-1 drawer-end z-10">
+        <nav className="flex flex-row justify-between items-center py-2 text-white max-w-7xl mx-auto px-2">
+          <div className="flex items-center sm:gap-1 drawer-end z-10 ">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
+            <div className="drawer-content lg:hidden">
               <label
                 htmlFor="my-drawer"
                 className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 sm:py-1 sm:px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
@@ -111,7 +107,7 @@ const Navbar = () => {
               onClick={() => handleLoading("/")}
               className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-1 cursor-pointer"
             >
-              <RiMovie2Fill /> MovieNest
+              <RiMovie2Fill className="text-5xl" /> MovieNest
             </h2>
             <div className="drawer-side z-40">
               <label
@@ -177,28 +173,46 @@ const Navbar = () => {
                 >
                   log out
                 </button>
-                <div className="md:hidden">
-                  <input
-                    onChange={handleSearchMovies}
-                    type="text"
-                    name="search"
-                    className="w-full py-1.5 md:py-2 px-2 md:px-4 text-black bg-transparent border rounded-lg border-primary outline-none"
-                    placeholder="Search"
-                  />
-                </div>
               </div>
             </div>
           </div>
-          <div className="md:flex w-full flex-row items-center justify-center gap-8 *:font-semibold relative hidden">
-            <div className="w-full">
-              <input
-                onChange={handleSearchMovies}
-                type="text"
-                name="search"
-                className="w-full py-2 lg:py-3 px-4 text-primary rounded-lg border-none outline-none"
-                placeholder="Search"
-              />
-            </div>
+          <div>
+            <ul className="flex flex-row gap-6">
+              <NavLink onClick={() => handleLoading("/")} className="">
+                Home
+              </NavLink>
+              <NavLink onClick={() => handleLoading("/allMovies")} className="">
+                All Movies
+              </NavLink>
+
+              <NavLink
+                onClick={() => handleLoading("/addMovie")}
+                className={`${user ? "block" : "hidden"}`}
+              >
+                Add Movie
+              </NavLink>
+
+              <NavLink
+                onClick={() => handleLoading("/trendingMovies")}
+                className=""
+              >
+                Trending Movies
+              </NavLink>
+
+              <NavLink
+                onClick={() => handleLoading("/favorite")}
+                className={`${user ? "block" : "hidden"}`}
+              >
+                My Favorites
+              </NavLink>
+
+              <NavLink
+                onClick={() => handleLoading("/userProfile")}
+                className={`${user ? "block" : "hidden"}`}
+              >
+                Profile
+              </NavLink>
+            </ul>
           </div>
           <div className="flex flex-row items-center gap-2 relative justify-end">
             {user ? (

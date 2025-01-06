@@ -1,13 +1,28 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import noMovie from "../assets/noMovies.jpg";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProviderContext } from "../Provider/AuthContext";
 import PageLoader from "../Components/PageLoader";
+import { FaSearch } from "react-icons/fa";
 
 const AllMovies = () => {
-  const { loading, theme } = useContext(ProviderContext);
-  const data = useLoaderData();
+  const { loading, theme, setData, data } = useContext(ProviderContext);
+
+  const [allData, setAllData] = useState([]);
+
   const navigate = useNavigate();
+
+  const handleSearchMovies = (value) => {
+    const input = value.target.value.toLowerCase();
+    const movie = allData.filter((m) => m?.title.toLowerCase().includes(input));
+    setData(movie);
+  };
+
+  useEffect(() => {
+    fetch("https://movie-portal-server-site.vercel.app/movies")
+      .then((res) => res.json())
+      .then((data) => setAllData(data));
+  }, []);
 
   return (
     <>
@@ -20,6 +35,21 @@ const AllMovies = () => {
               OUR LATEST MOVIES
             </h3>
             <div className="border-b-2 border-primary w-10"></div>
+          </div>
+
+          <div className="flex w-full flex-row items-center justify-center gap-8 my-4">
+            <div className="flex items-center">
+              <div className="relative">
+                <input
+                  onChange={handleSearchMovies}
+                  type="text"
+                  name="search"
+                  className="w-full h-full py-2 lg:py-3 pl-10 pr-4 placeholder:text-xs"
+                  placeholder="Search by movie name"
+                />
+                <FaSearch className="absolute top-1/2 -translate-y-1/2 left-4" />
+              </div>
+            </div>
           </div>
           <div className="m-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12 lg:gap-16">
             {data.length > 0 ? (

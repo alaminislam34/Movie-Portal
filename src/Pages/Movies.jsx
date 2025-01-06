@@ -25,7 +25,7 @@ const Movies = () => {
         <div>
           {data.length > 0 ? (
             list === "grid" ? (
-              <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-14">
+              <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 lg:gap-14">
                 {data.slice(0, 8).map((movie) => (
                   <div
                     key={movie._id}
@@ -40,7 +40,7 @@ const Movies = () => {
                     data-aos-duration="5000"
                   >
                     <div className="relative group duration-500 overflow-hidden rounded-t-lg ">
-                      <div className="h-[300px] sm:h-[400px] md:h-[420px]">
+                      <div className="h-[300px] sm:h-[400px] md:h-[420px] lg:h-[350px]">
                         <img
                           className="object-cover bg-center bg-no-repeat w-full h-full"
                           src={movie.poster}
@@ -90,7 +90,7 @@ const Movies = () => {
                           {movie.genre.map((g, i) => (
                             <p
                               key={i}
-                              className="text-gray-500 font-medium text-xs md:text-sm"
+                              className="badge bg-primary text-white py-1 px-2 text-xs"
                             >
                               {g}
                             </p>

@@ -45,7 +45,7 @@ const Home = () => {
         <PageLoader />
       ) : (
         <div className="h-full">
-          <section className="bg-bgMovie w-full h-full py-12 bg-no-repeat bg-cover object-cover bg-center flex justify-center items-center">
+          <section className="bg-bgMovie w-full h-full bg-no-repeat bg-cover object-cover bg-center flex justify-center items-center">
             <Banner />
           </section>
           <section className="w-11/12 mx-auto my-12">

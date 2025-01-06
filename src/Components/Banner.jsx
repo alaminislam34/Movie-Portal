@@ -44,7 +44,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="h-[500px] w-full md:py-4 relative">
+    <div className="h-screen w-full relative">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -67,12 +67,12 @@ const Banner = () => {
         }}
         modules={[Autoplay, Pagination, Navigation]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="mySwiper h-full w-11/12 md:w-10/12 mx-auto"
+        className="mySwiper h-full w-full"
       >
         {images.map((image, index) => (
           <SwiperSlide key={index} className="h-full w-full relative">
             <img
-              className="w-11/12 mx-auto h-full object-cover bg-center rounded-xl"
+              className=" w-full h-full object-cover bg-center rounded-xl"
               src={image.b}
             />
           </SwiperSlide>
