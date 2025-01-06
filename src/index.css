@@ -5,9 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-a.active {
-  border-bottom: white;
-}
 svg.star-svg {
   display: inline;
 }

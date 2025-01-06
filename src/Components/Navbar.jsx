@@ -5,14 +5,24 @@ import { ProviderContext } from "../Provider/AuthContext";
 import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 
 const Navbar = () => {
-  const { user, handleLogoutUser, setData, setLoading, id, theme, setTheme } =
+  const { user, handleLogoutUser, setLoading, id, theme, setTheme } =
     useContext(ProviderContext);
   const [show, setShow] = useState(false);
-  const [allData, setAllData] = useState([]);
+  const [sticky, setSticky] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(theme);
+  useEffect(() => {
+    const sticky = () => {
+      if (window.scrollY >= 100) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+    window.addEventListener("scroll", sticky);
+    return () => window.removeEventListener("scroll", sticky);
+  }, []);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -66,36 +76,22 @@ const Navbar = () => {
     }, 1500);
   };
 
-  useEffect(() => {
-    fetch("https://movie-portal-server-site.vercel.app/movies")
-      .then((res) => res.json())
-      .then((data) => setAllData(data));
-  }, []);
-
-  const handleSearchMovies = (value) => {
-    const input = value.target.value.toLowerCase();
-    const movie = allData.filter((m) => m?.title.toLowerCase().includes(input));
-    setData(movie);
-  };
-
   return (
-    <div className="h-12 md:h-16" data-aos="fade-down" data-aos-duration="1000">
-      <div
-        className={`${
-          theme === "light"
-            ? "bg-primary"
-            : theme === "dark"
-            ? "bg-[#661111]"
-            : ""
-        }  fixed top-0 left-0 w-full z-50`}
-      >
-        <nav className="flex flex-row justify-between items-center py-2 text-white max-w-7xl mx-auto px-2">
+    <div
+      className={`h-16 md:h-[70px] lg:h-[75px] ${
+        sticky ? "sticky top-0 left-0 w-full z-50 bg-primary text-white" : ""
+      } `}
+      data-aos="fade-down"
+      data-aos-duration="1000"
+    >
+      <div className={`h-full py-3 `}>
+        <nav className="flex flex-row justify-between items-center max-w-7xl mx-auto px-2">
           <div className="flex items-center sm:gap-1 drawer-end z-10 ">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content lg:hidden">
               <label
                 htmlFor="my-drawer"
-                className="drawer-button cursor-pointer bg-[#d12222] text-white duration-700 sm:py-1 sm:px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
+                className="drawer-button cursor-pointer bg-[#d12222] duration-700 sm:py-1 sm:px-2 md:py-2 flex justify-center items-center md:px-4 rounded-md"
               >
                 <RiMenu2Line className="text-xl md:text-xl lg:text-2xl" />
               </label>
@@ -107,7 +103,8 @@ const Navbar = () => {
               onClick={() => handleLoading("/")}
               className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center gap-1 cursor-pointer"
             >
-              <RiMovie2Fill className="text-5xl" /> MovieNest
+              <RiMovie2Fill className="text-3xl md:text-4xl lg:text-5xl" />{" "}
+              <span>MovieNest</span>
             </h2>
             <div className="drawer-side z-40">
               <label
@@ -169,14 +166,14 @@ const Navbar = () => {
                 </ul>
                 <button
                   onClick={handleLogoutUser}
-                  className="w-full hover:bg-transparent text-white border border-primary duration-1000 hover:text-primary bg-primary py-1.5 md:py-2 mb-2"
+                  className="w-full hover:bg-transparent border border-primary duration-1000 hover:text-primary bg-primary py-1.5 md:py-2 mb-2"
                 >
                   log out
                 </button>
               </div>
             </div>
           </div>
-          <div>
+          <div className="hidden lg:block">
             <ul className="flex flex-row gap-6">
               <NavLink onClick={() => handleLoading("/")} className="">
                 Home
@@ -218,12 +215,13 @@ const Navbar = () => {
             {user ? (
               <div
                 onClick={() => setShow(!show)}
-                className="w-10 md:w-12 lg:w-14 h-10 md:h-12 lg:h-14 tooltip tooltip-left bg-white rounded-full z-[10]"
+                className="w-10 md:w-12 h-10 md:h-12 tooltip tooltip-left bg-white rounded-full z-[10]"
                 data-tip={user ? user.email : ""}
               >
                 <img
                   src={user.photoURL}
                   className="w-full h-full object-cover bg-center rounded-full border border-red-500 cursor-pointer"
+                  referrerPolicy="no-referrer"
                 />
               </div>
             ) : (

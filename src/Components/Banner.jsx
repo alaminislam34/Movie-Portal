@@ -72,7 +72,7 @@ const Banner = () => {
         {images.map((image, index) => (
           <SwiperSlide key={index} className="h-full w-full relative">
             <img
-              className=" w-full h-full object-cover bg-center rounded-xl"
+              className=" w-full h-full object-cover bg-center"
               src={image.b}
             />
           </SwiperSlide>

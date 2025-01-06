@@ -25,7 +25,7 @@ const Movies = () => {
         <div>
           {data.length > 0 ? (
             list === "grid" ? (
-              <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 lg:gap-14">
+              <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 lg:gap-14">
                 {data.slice(0, 8).map((movie) => (
                   <div
                     key={movie._id}
@@ -40,7 +40,7 @@ const Movies = () => {
                     data-aos-duration="5000"
                   >
                     <div className="relative group duration-500 overflow-hidden rounded-t-lg ">
-                      <div className="h-[300px] sm:h-[400px] md:h-[420px] lg:h-[350px]">
+                      <div className="h-[280px] sm:h-[300px] md:h-[300px]">
                         <img
                           className="object-cover bg-center bg-no-repeat w-full h-full"
                           src={movie.poster}
@@ -53,7 +53,7 @@ const Movies = () => {
                       <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center flex-col gap-4 *:text-primary">
                         <button
                           onClick={() => navigate(`/viewDetails/${movie._id}`)}
-                          className="w-32 md:w-36 py-1.5 md:py-2 text-sm md:text-base border-2 font-semibold backdrop-blur border-primary relative left-96 group-hover:left-0 duration-700 hover:text-white hover:bg-primary"
+                          className="w-32 md:w-36 py-1.5 md:py-2 text-sm rounded-lg border-2 font-semibold backdrop-blur border-primary relative left-96 group-hover:left-0 duration-700 hover:text-white hover:bg-primary"
                         >
                           View Details
                         </button>
@@ -64,7 +64,6 @@ const Movies = () => {
                         {movie.title}
                       </h2>
                       <div className="rating rating-sm flex items-center">
-                        <span>({movie.rating} )</span>
                         {Array.from({ length: 10 }, (_, index) => {
                           const isFullStar = index < Math.floor(movie.rating);
                           const isHalfStar =
