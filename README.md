@@ -1,6 +1,3 @@
-Here’s the updated **README.md** content in a more professional format, which you can copy directly:
-
-````markdown
 # Movie Portal
 
 ## MovieNest
@@ -67,6 +64,7 @@ VITE_messagingSenderId=your_messaging_sender_id_here
 VITE_appId=your_firebase_app_id_here
 VITE_URL=your_backend_api_url_here
 ```
+
 ````
 
 Make sure to replace the placeholders with your actual Firebase and API keys.
@@ -89,3 +87,4 @@ Make sure to replace the placeholders with your actual Firebase and API keys.
    ```
 
 Now you can start building and contributing to the project!
+````
