@@ -65,8 +65,6 @@ VITE_appId=your_firebase_app_id_here
 VITE_URL=your_backend_api_url_here
 ```
 
-````
-
 Make sure to replace the placeholders with your actual Firebase and API keys.
 
 ## Setup Instructions
@@ -87,4 +85,3 @@ Make sure to replace the placeholders with your actual Firebase and API keys.
    ```
 
 Now you can start building and contributing to the project!
-````
