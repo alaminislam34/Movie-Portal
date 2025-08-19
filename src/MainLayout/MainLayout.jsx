@@ -4,6 +4,7 @@ import PageLoader from "../Components/PageLoader";
 import { useEffect, useState } from "react";
 import Footer from "../Components/Footer";
 import { FiTriangle } from "react-icons/fi";
+import Banner from '../Components/Banner'
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);
@@ -34,7 +35,10 @@ const MainLayout = () => {
       ) : (
         <div>
           <Navbar />
-          <section className="max-w-[1380px] mx-auto overflow-hidden min-h-[80vh]">
+          <section className="w-full bg-no-repeat bg-cover object-cover bg-center flex justify-center items-center">
+            <Banner />
+          </section>
+          <section className="max-w-[1400px] mx-auto overflow-hidden min-h-[80vh]">
             <Outlet />
           </section>
           <Footer />

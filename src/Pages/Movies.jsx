@@ -87,12 +87,12 @@ const Movies = () => {
                       <div className="flex flex-row items-center gap-2">
                         <p className="flex flex-wrap items-center gap-2">
                           {movie.genre.map((g, i) => (
-                            <p
+                            <span
                               key={i}
                               className="badge bg-primary text-white py-1 px-2 text-xs"
                             >
                               {g}
-                            </p>
+                            </span>
                           ))}
                         </p>
                       </div>

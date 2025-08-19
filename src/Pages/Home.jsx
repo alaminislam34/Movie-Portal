@@ -1,4 +1,3 @@
-import Banner from "../Components/Banner";
 import { IoGrid } from "react-icons/io5";
 import { FaListUl } from "react-icons/fa";
 import { useContext } from "react";
@@ -45,9 +44,7 @@ const Home = () => {
         <PageLoader />
       ) : (
         <div className="h-full">
-          <section className="bg-bgMovie w-full h-full bg-no-repeat bg-cover object-cover bg-center flex justify-center items-center">
-            <Banner />
-          </section>
+       
           <section className="w-11/12 mx-auto my-12">
             <div className="flex flex-col justify-start items-center">
               <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-left inline-block w-full py-4 border-b-2 border-primary">
