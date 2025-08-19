@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <div className="bg-base-300 text-base-content pt-10">
-      <div className="max-w-[1380px] mx-auto">
+      <div className="max-w-[1400px] mx-auto">
         <div className="md:col-span-2  lg:col-span-5 justify-center items-center flex mb-4">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold flex flex-row items-center ">
             <RiMovie2Fill className="text-primary mr-2" />
@@ -152,7 +152,10 @@ const Footer = () => {
             </div>
           </div>
         </footer>
-        <div className="w-full py-6 md:py-8 bg-black flex text-white flex-col md:flex-row gap-4 justify-between items-center">
+       
+      </div>
+      <div className="w-full py-6 md:py-8 bg-black">
+         <div className="max-w-[1400px] w-11/12 mx-auto flex text-white flex-col md:flex-row gap-4 justify-between items-center">
           <p className=" px-4 text-xs md:text-sm text-center">
             Copyright 2022-23 <span className="text-primary">MovieNest</span> .
             All rights reserved - Design by{" "}
@@ -182,6 +185,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+      
     </div>
   );
 };
